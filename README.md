@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-# cs_learning
-
-
-
-=======
 # CS_learning
 
 ## Algorithm
