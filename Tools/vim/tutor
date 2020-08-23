@@ -1,0 +1,136 @@
+```````````````````````````````` Summary````````````````````````````````````
+
+                                 Lesson 1
+h left, l right, j down, k up
+when you want to open a file: vim <file name>
+
+exit with save:  :wq
+exit without save: :q!
+
+to delete a character: x
+insert or append text type: i, a
+
+                                 Lesson 2
+dw delete a word
+d$ delete the rest words in current line
+dd delete a line
+
+2w move forward 2 words and at the beginning of the word
+2e move forward 2 words and at the end of the word 
+
+the format for a command: operator [number] motion
+such as 2w, d2w
+
+u undo the previous actions
+U undo all changes on a line
+control+r undo the undo's
+
+                                  Lesson 3
+p put back the sentence
+r replace the character under the cusor
+ce change the rest of the word
+c2w change the following two words
+c$ change the rest words in current line
+
+                                   Lesson 4
+ctrl+g display your current location
+G move to the end of the file
+gg move to the start of the file
+number G move to the number line
+
+/+pharse forward search the target pharse
+?+pharse backward search the target pharse
+during the search n forward next, N backward nest
+ctrl+o back your position
+ctrl+i new position
+
+% find the match (),{},[]
+
+:s/old/new/ substitute the first old
+:s/old/new/g substitute all old on a line
+:%s/old/new/g substitute all old in the file
+:%s/old/new/gc ask whether to subsitute
+:#,#s/old/new/g subsitute all old between # and # line
+
+                                  Lesson 5
+:! execute an external command
+  :!ls show a directory listing
+  :!rm File remove a file
+
+:w Filename write a file in current directory
+ 
+v motion  selest part of texts the :w Filename write selected part in file
+
+:r Filename retrieves file Filename and put it below the cursor
+
+:r !ls read the list of files in current directory below the cursor
+
+                                   Lesson 6
+o open a line below the cursor
+O open a line above the cursor
+
+a insert text after the cursor
+A insert text after the end of the line
+ 
+e move to the end of a word
+
+y copy text
+p put paste
+
+R replace sth
+
+:set ic ignore upper/lower casr during searching
+:set is show partial matches for a search pharse
+:set hls highlight all matching pharses 
+
+use 'no' to swich off 
+:set noic, :set nohls
+
+                               Lesson 7
+:help or <F1> or HELP to open a help window
+:help cmd find cmd in help
+
+ctrl+w jump to another window
+:q close the help window
+
+creat a vimrc startup script tp keep your preferred setting
+
+:e ctrl+d to see all possible cmpletetions
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
