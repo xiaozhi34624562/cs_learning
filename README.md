@@ -3,7 +3,7 @@
 ## Algorithm
 - [Algorithms, 4th Edition](https://cuvids.io/app/course/2/)
 - Notes 
- - 
+ 
 
 ## OS
 - [Computer Systems: A Programmer's Perspective](http://csapp.cs.cmu.edu)
@@ -30,4 +30,10 @@
 
 ## Python
 - ESRGAN(Enhanced Super Resolution GAN) 
-- Classification on the CheXpert (DenseNet, EfficientNet, GradCAM and LIME)
+- Classification on the CheXpert 
+  - Methods
+    - DenseNet(3 kinds)
+    - EfficientNet
+  - Explaination
+    - GradCAM
+    - LIME
