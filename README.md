@@ -32,7 +32,7 @@
 ## Python
 - ESRGAN(Enhanced Super Resolution GAN) 
   - Try to use ESRGAN on three continous flames
-- Classification on the CheXpert 
+- [Classification on the CheXpert](https://github.com/xiaozhi34624562/cs_learning/tree/master/Python/Classification%20on%20Chexpert) 
   - Methods
     - DenseNet(3 kinds)
     - EfficientNet
