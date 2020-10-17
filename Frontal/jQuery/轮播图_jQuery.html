@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>轮播图</title>
+    <style>
+    #container{
+        position: absolute;
+        width: 720px;
+        height: 257px;
+        margin-top: 200px;
+        margin-left: 350px;
+        overflow: hidden;
+    }
+    #container img{
+        display: none;
+        width: 720px;
+        height: 257px;
+
+    }
+    #container img:nth-child(1){
+        display:block;
+    }
+
+    /* 小光点指示标志位置 */
+    #buttons{
+        position:absolute;
+        width: 150px;
+        height: 40px;
+        left: 350px;
+        top: 430px;
+        z-index: 100;
+    }
+    /* 小光点样子 */
+    #buttons ul li{
+        list-style: none;
+        width: 10px;
+        height: 10px;
+        margin-right: 10px;
+        float: left;
+        border-radius: 50%;
+        background-color: #807d7d;
+        cursor: pointer;
+        overflow: hidden;
+    }
+    #buttons ul li:nth-child(1){
+        background-color: #f5f0f0;
+    }
+
+    /* 鼠标放在上面或者展示此图是，变亮 */
+    #buttons ul li:hover{
+        background-color: #f5f0f0;
+    }
+ 
+    /* 两个翻页箭头 */
+    .arrow{
+        display: block;
+        position: absolute;
+        cursor: pointer;
+        top: 310px;
+        height: 40px;
+        width: 40px;
+        line-height: 40px;
+        text-align: center;
+        z-index: 200;
+        background: RGBA(170, 170, 170, .5) ;
+        font-size: 2em;
+        font-weight: 700;
+        color: #807d7d;
+    }
+
+    .arrow:hover{
+        color: #f5f0f0;
+    }
+
+    #left{
+        left: 358px;
+    }
+
+    #right{
+        left: 1038px;
+    }
+
+    </style>
+</head>
+<body>
+    <!-- 循环播放的五张照片 -->
+    <div id="container" >
+        <img src="./image/11.png" alt="photo1">
+        <img src="./image/22.png" alt="photo2">
+        <img src="./image/33.png" alt="photo3">
+        <img src="./image/44.png" alt="photo4">
+        <img src="./image/55.png" alt="photo5">
+    </div>
+    <!-- 与照片对应的五个点 -->
+    <div id="buttons">
+        <ul>
+            <li value="0"></li>
+            <li value="1"></li>
+            <li value="2"></li>
+            <li value="3"></li>
+            <li value="4"></li>
+        </ul>
+    </div>
+    <!-- 左右两个箭头 -->
+    <a href="javascript:;" class="arrow" id="left">&lt;</a>
+    <a href="javascript:;" class="arrow" id="right">&gt;</a>
+</body>
+<script src="./jquery-3.5.0.min.js"></script>
+<script>
+    // 设置初始idx为0，获取照片的数量
+    var idx = 0;
+    var time = null;
+    var num = $("img").length;
+
+    $(function(){
+
+        time = setInterval(function(){
+            autoImgShow("right");
+        }, 2000);
+
+        // 鼠标在照片上时，照片停止播放，离开时照片开始播放
+        $("#container").mouseover(function(){
+            clearInterval(time);
+        }).mouseout(function(){
+            time = setInterval(function(){
+                autoImgShow("right");
+            }, 2000)
+        })
+
+        // // 鼠标在照片上时，照片停止播放，离开时照片开始播放
+        // $("#container").mouseout(function(){
+        //     time = setInterval(function(){
+        //         autoImgShow("right");
+        //     }, 2000);
+        // }).mouseover(function(){
+        //     clearInterval(time);
+        // });
+
+        // 点左按钮，照片向前播放
+        $("#left").click(function(){
+            autoImgShow("left");
+        })
+
+        // 点右按钮时，照片向后播放
+        $("#right").click(function(){
+            autoImgShow("right");
+        })
+
+        $("#buttons ul li").click(function(){
+            var liIndex = $(this).index();
+            idx = liIndex - 1;
+            autoImgShow("right");
+            
+        })
+    })
+
+    // 自动播放是向右，idx+1；每次先隐藏原先照片，再显示目标照片
+    function autoImgShow(target){
+        var idx2 = idx;
+        idx = target == "right" ? ++idx : --idx;
+        idxChange();
+        $("#container img:eq("+(idx2)+")").css("display", "none");
+        $("#container img:eq("+idx+")").css("display", "block"); 
+        $("ul li:eq("+idx2+")").css("background-color", "#807d7d")
+        $("ul li:eq("+idx+")").css("background-color", "#f5f0f0")
+        }
+    // 设置照片idx改变的顺序
+    function idxChange(){
+        idx = idx > num-1 ? 0 : idx;
+        idx = idx < 0 ? num-1 : idx; 
+    }
+
+    
+
+</script>
+</html>

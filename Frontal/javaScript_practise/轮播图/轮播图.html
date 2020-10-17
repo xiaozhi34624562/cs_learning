@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>轮播图</title>
+    <style>
+    #container{
+        position: absolute;
+        width: 720px;
+        height: 257px;
+        margin-top: 200px;
+        margin-left: 350px;
+    }
+    #container img{
+        display: none;
+        width: 720px;
+        height: 257px;
+
+    }
+    #container img:nth-child(1){
+        display:block;
+    }
+
+    /* 小光点指示标志位置 */
+    #buttons{
+        position:absolute;
+        width: 150px;
+        height: 40px;
+        left: 350px;
+        top: 430px;
+        z-index: 100;
+    }
+    /* 小光点样子 */
+    #buttons ul li{
+        list-style: none;
+        width: 10px;
+        height: 10px;
+        margin-right: 10px;
+        float: left;
+        border-radius: 50%;
+        background-color: #807d7d;
+        cursor: pointer;
+    }
+
+    /* 鼠标放在上面或者展示此图是，变亮 */
+    #buttons ul li:hover{
+        background-color: #f5f0f0;
+    }
+ 
+    /* 两个翻页箭头 */
+    .arrow{
+        display: block;
+        position: absolute;
+        cursor: pointer;
+        top: 310px;
+        height: 40px;
+        width: 40px;
+        line-height: 40px;
+        text-align: center;
+        z-index: 200;
+        background: RGBA(170, 170, 170, .5) ;
+        font-size: 2em;
+        font-weight: 700;
+        color: #807d7d;
+    }
+
+    .arrow:hover{
+        color: #f5f0f0;
+    }
+
+    #left{
+        left: 358px;
+    }
+
+    #right{
+        left: 1038px;
+    }
+
+    </style>
+</head>
+<body>
+    <!-- 循环播放的五张照片 -->
+    <div id="container" onmouseover="Stop()" onmouseout="Start()" >
+        <img src="./image/11.png" alt="photo">
+        <img src="./image/22.png" alt="photo">
+        <img src="./image/33.png" alt="photo">
+        <img src="./image/44.png" alt="photo">
+        <img src="./image/55.png" alt="photo">
+    </div>
+    <!-- 与照片对应的五个点 -->
+    <div id="buttons">
+        <ul>
+            <li value="0"></li>
+            <li value="1"></li>
+            <li value="2"></li>
+            <li value="3"></li>
+            <li value="4"></li>
+        </ul>
+    </div>
+    <!-- 左右两个箭头 -->
+    <a href="javascript:;" class="arrow" id="left">&lt;</a>
+    <a href="javascript:;" class="arrow" id="right">&gt;</a>
+</body>
+<script>
+
+    var time = null;
+    var idx = 0;
+
+    function Show(){
+        idx = idx > 4 ? 0 : idx;
+        idx = idx < 0 ? 4 : idx;
+        var img = document.getElementById("container").getElementsByTagName("img");
+        var button = document.getElementById("buttons").getElementsByTagName("li")
+        for(var i=0; i<img.length; i++){
+                if (i == idx){
+                    img[i].style.display = "block";
+                    button[i].style.backgroundColor = "#f5f0f0";
+                } else {
+                    img[i].style.display = "none";
+                    button[i].style.backgroundColor = "#807d7d";
+                }
+        }
+    }
+
+    function Start(){
+        time = setInterval(function(){
+            Show()
+            idx++;
+        }, 2000)
+    }
+
+    function Stop(){
+        clearInterval(time);
+    }
+
+    var left = document.getElementById("left");
+    var right = document.getElementById("right");
+    
+    left.onclick = function(){
+        idx--;
+        Show();
+    }
+
+    right.onclick = function(){
+        idx++;
+        Show();
+    }
+
+
+
+    Start()
+
+
+</script>
+</html>

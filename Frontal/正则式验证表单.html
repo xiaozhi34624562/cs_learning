@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{padding: 0px; margin: 0px;}
+        #container {
+            width: 582px;
+            height: 452px;
+            background-color: rgba(122, 204, 240, 0.596);
+            border: 1px solid black;
+            margin: 200px 300px;
+        }
+        #container form{
+            margin-left: 50px;
+            width: 530px;
+        }
+        #container form h1{
+            margin-top: 20px;
+            font-weight: 700;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        #container form span{
+            width: 200px;
+            color: aliceblue;
+            font-size: small;
+        }
+        #container form span.remainder{
+            margin-left: 20px;
+        }
+        #container form span.sex_remainder{
+            margin-left: 98px;
+        }
+        span.education_remainder{
+            margin-left: 112px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <form action="./a.html" name="myform" onsubmit="return doSubmit()" method="POST" >
+            <h1>个人信息登记表</h1><br>
+            登录账号：<input type="text" name="account" onblur="checkAccount()">
+            <span class="remainder">6～18位有效字符（字母、数字、下划线）</span><br></br>
+            登录密码：<input type="password" name="passwd" onblur="checkPasswd()"> 
+            <span class="remainder">6～18位任意字符</span><br></br>
+            重复密码：<input type="password" name="passwdSec" onblur="checkPasswdSec()">
+            <span class="remainder">重复密码与登录密码一致</span><br></br>
+            性&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp别：<input type="radio" name="sex" value="0" onblur="checkSex()" >男&nbsp&nbsp
+                                                            <input type="radio" name="sex" value="1" onblur="checkSex()">女
+                                                            <span class="sex_remainder">必须选一个</span><br></br>
+            年&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp龄：<input type="text" name="age" onblur="checkAge()">
+            <span class="remainder">大于零的任意两位整数</span><br></br>
+            手机号码：<input type="text" name="phone" onblur="checkPhone()" >
+            <span class="remainder">由1开头的11位整数</span><br></br>
+            邮&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp箱：<input type="text" name="mail" onblur="checkMail()" >
+            <span class="remainder">有效的Email地址</span><br></br>
+            学&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp历：<select name="education" onblur="checkEducation()">
+                <option value=-1>请选择</option>
+                <option value=0>中学</option>
+                <option value=1>本科</option>
+                <option value=2>硕士</option>
+                <option value=3>博士</option>
+            </select>
+            <span class="education_remainder" >必须选一个学历</span><br></br>
+            <input type="submit" value="提交"> &nbsp&nbsp
+            <input type="reset" value="重置"> <br></br>
+        </form>
+    </div>
+</body>
+<script>
+    function checkAccount(){
+        var account = document.myform.account.value;
+        if (account.match(/^\w{6,18}$/) == null){
+            alert("请检查你的账号");
+            return false;
+        }
+        return true;
+    }
+
+    function checkPasswd(){
+        var passwd = document.myform.passwd.value
+        if(passwd.match(/^\w{6,18}$/) == null){
+            alert("请检查你的密码设置");
+            return false;
+        }
+        return true
+    }
+    function checkSex(){
+        var sex = document.myform.sex.value;
+        if (sex==0 || sex==1){
+            return true;
+        } else {
+            alert("请至少选择一个性别");
+            return false;
+        }
+    }
+    function checkPasswdSec(){
+        var passwd = document.myform.passwd.value;
+        var passwdSec = document.myform.passwdSec.value;
+        if(passwd != passwdSec){
+            alert("重复密码和登录密码不相同")
+            return false;
+        }
+        return true;
+    }
+    function checkAge(){
+        var age = document.myform.age.value;
+        var pat = new RegExp("^[0-9][0-9]$")
+        if (pat.test(age)){
+            return true;
+        } else{
+            alert("请检查你的年龄");
+            return false;
+        }
+
+    }
+    function checkPhone(){
+        var phone = document.myform.phone.value;
+        var pat = new RegExp("^1[0-9]{10}$");
+        if(pat.test(phone)){
+            return true;
+        } else {
+            alert("请检查你的手机号码");
+            return false;
+        }
+    }
+    function checkMail(){
+        var mail = document.myform.mail.value;
+        if(mail.match(/^\w+@\w+\.\w+$/) != null){
+            return true;
+        } else {
+            alert("请检查你的邮件地址");
+            return false;
+        }
+    }
+    function checkEducation(){
+        var education = document.myform.education.value;
+        if(education>=0 && education<=3){
+            return true;
+        } else {
+            alert("请至少选择一项");
+            return false;
+        }
+    }
+
+    function doSubmit(){
+        return checkAccount() && checkPasswd() && checkPasswdSec() && checkSex() && checkAge() && checkPhone() && checkMail() && checkEducation();
+    }
+
+
+</script>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>点名器</title>
+    <style>
+        #outside{
+            /* 怎么把图片放在正中间 */
+            margin: 200px auto auto 400px;
+            width: 480px;
+            height: 300px;
+            position: absolute;
+            background-color: orangered;
+            font-weight: 600;
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            border-radius: 20px;
+            border: 5px solid #e7e2e2 ;
+        }
+
+        #outside ul li.upPart{
+            display: block;
+            width: 240px;
+            height: 80px;
+            line-height: 80px;
+            margin-top: 75px;
+            margin-left: 80px;
+            background-color: #a9a9aa;
+            font-size: 2em;
+            border-radius: 15px;
+        }
+
+        #outside ul li.downPart{
+            display: block;
+            width: 90px;
+            height: 45px;
+            line-height: 45px;
+            margin-top: 50px;
+            margin-left: 155px;
+            background-color:green;
+            border-radius: 10px;
+            border: 2px solid #fdfbfb;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="outside">
+        <!-- <button onclick="start()">开始</button> -->
+        <ul>
+            <li class="upPart">随机点名器</li>
+            <li class="downPart">开始</li>
+        </ul>
+    </div>
+</body>
+<script>
+
+    var names = ["张三", "李四", "王五", "孙六","田七"]
+    var time = null;
+
+    document.getElementsByClassName("downPart")[0].onclick = function() {
+        if (this.innerHTML == "开始"){
+            this.style.backgroundColor = "red";
+            this.style.borderColor = "blue"; 
+            this.innerHTML = "暂停";
+            time = setInterval(function(){
+            var idx = Math.floor(Math.random() * (names.length - 1));
+            document.getElementsByClassName("upPart")[0].innerHTML = names[idx];
+            }, 300)
+        } else {
+                clearInterval(time);
+                this.style.backgroundColor = "green";
+                this.style.borderColor = "#fbfbfb"; 
+                this.innerHTML = "开始"; 
+             
+        }        
+    }
+
+    
+    
+
+    // document.getElementsByClassName("downPart")[0].onclick = function click(){
+    //     this.style.backgroundColor = "red";
+    //     this.style.borderColor = "blue"; 
+    //     this.innerHTML = "暂停";
+    //     time = setInterval(function(){
+    //     var idx = Math.floor(Math.random() * (names.length - 1));
+    //     document.getElementsByClassName("upPart")[0].innerHTML = names[idx];
+    //     }, 300)
+    //     this.onclick = function(){
+    //         clearInterval(time);
+    //         this.style.backgroundColor = "green";
+    //         this.style.borderColor = "#fbfbfb"; 
+    //         this.innerHTML = "开始"; 
+    //         click()
+    //     }         
+    //}
+    
+</script>
+</html>

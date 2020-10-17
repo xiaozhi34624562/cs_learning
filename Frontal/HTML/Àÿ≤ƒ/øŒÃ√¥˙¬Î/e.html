@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>HTML实例--表格标签</h1>
+
+    <table border="1" width="500" cellspacing="0" cellpadding="4">
+        <caption><h2>学生信息表</h2></caption>
+        <thead>
+            <tr>
+                <th>学号</th>
+                <th>姓名</th>
+                <th>年龄</th>
+                <th>班级</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1001</td>
+                <td>张三</td>
+                <td>20</td>
+                <td rowspan="2" align="center" valign="top">t201班</td>
+            </tr>
+            <tr>
+                <td>1002</td>
+                <td>李四</td>
+                <td>22</td>
+                <!--<td>t201班</td>-->
+            </tr>
+            <tr>
+                <td>1003</td>
+                <td>王五</td>
+                <td>25</td>
+                <td>t200班</td>
+            </tr>
+            <tr>
+                <td>1004</td>
+                <td>赵六</td>
+                <td colspan="2" align="center">21</td>
+                <!--<td>t202班</td>-->
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
