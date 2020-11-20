@@ -1,0 +1,938 @@
+Last login: Wed Oct 21 13:43:23 on console
+(base) xiaozhi@xiaozhideMacBook-Pro ~ % mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 2
+Server version: 5.7.31
+
+Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
+ERROR 1820 (HY000): You must reset your password using ALTER USER statement before executing this statement.
+mysql> show databases;
+ERROR 1820 (HY000): You must reset your password using ALTER USER statement before executing this statement.
+mysql> \q
+Bye
+(base) xiaozhi@xiaozhideMacBook-Pro ~ % mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 3
+Server version: 5.7.31
+
+Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
+ERROR 1820 (HY000): You must reset your password using ALTER USER statement before executing this statement.
+mysql> alter user 'root'@'localhost' identified by '1234';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| basicPractise      |
+| mysql              |
+| performance_schema |
+| sys                |
+| xiaowang           |
+| xiaozhi            |
++--------------------+
+7 rows in set (0.01 sec)
+
+mysql> use basicPractise;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show tables;
++-------------------------+
+| Tables_in_basicpractise |
++-------------------------+
+| grade                   |
+| student                 |
+| transcript              |
++-------------------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from student;
++-----------+-------------+----------+-----+---------+-------------+---------+------------+-------------+
+| studentId | studentName | password | sex | gradeId | phone       | address | birth      | email       |
++-----------+-------------+----------+-----+---------+-------------+---------+------------+-------------+
+| s1100001  | 金蝶        | 1234     | f   |       1 | 13148376575 | 山东    | 1995-10-01 | a@gmial.com |
++-----------+-------------+----------+-----+---------+-------------+---------+------------+-------------+
+1 row in set (0.00 sec)
+
+mysql> insert into student value('s1101000','章三','1111','m',2,'13422222222','北京','1989-10-01','b@gmail.com');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student value('s1101001','劳伦斯','1211','m',3,'1342222222','北京','1989-10-03','x@gmail.com');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student value('s1101002','凌骐骐','2211','f',4,'1342222343','山东','1989-09-03','x@gmail.com');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student value('s1101003','凌石栋','2311','m',3,'1343222343','山东','1989-09-03','d@gmail.com');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student value('s1101004','娃 石栋','231','m',2,'1347222343','上海','1997-09-03','w@gmail.com');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student value('s1101005','里斯','2231','f',2,'1347222443','上海','1997-09-04','t@gmail.com');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student value('s1101006','莉丝','2231','m',3,'1347292443','山东','1989-09-04','t@gmail.com');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student value('s1101007','张四','2831','m',3,'1347292443','山东','1989-09-04','j@gmail.com');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from transcript;
++----+-----------+-----------+-------+---------------------+
+| id | studentId | subjectId | score | examTime            |
++----+-----------+-----------+-------+---------------------+
+|  1 | s1100001  |         1 |    98 | 2010-10-10 15:00:00 |
+|  2 | s1101000  |         2 |   100 | 2010-10-11 15:00:00 |
+|  3 | s1101001  |         3 |   100 | 2010-10-12 15:00:00 |
+|  4 | s1101002  |         4 |    45 | 2010-10-12 15:00:00 |
+|  5 | s1101003  |         8 |    70 | 2010-10-12 15:00:00 |
+|  6 | s1101004  |         8 |    40 | 2010-10-12 15:00:00 |
+|  7 | s1101005  |         5 |    80 | 2010-10-12 15:00:00 |
+|  8 | s1101006  |         3 |    80 | 2010-10-12 15:00:00 |
+|  9 | s1101007  |         3 |    78 | 2010-10-12 15:00:00 |
+| 10 | s1101008  |         3 |   100 | 2010-10-12 15:00:00 |
++----+-----------+-----------+-------+---------------------+
+10 rows in set (0.00 sec)
+
+mysql> insert into student value('s1101008','凌舞','2841','m',3,'1347242443','山东','1989-09-24','f@gmail.com');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from student;
++-----------+-------------+----------+-----+---------+-------------+---------+------------+-------------+
+| studentId | studentName | password | sex | gradeId | phone       | address | birth      | email       |
++-----------+-------------+----------+-----+---------+-------------+---------+------------+-------------+
+| s1100001  | 金蝶        | 1234     | f   |       1 | 13148376575 | 山东    | 1995-10-01 | a@gmial.com |
+| s1101000  | 章三        | 1111     | m   |       2 | 13422222222 | 北京    | 1989-10-01 | b@gmail.com |
+| s1101001  | 劳伦斯      | 1211     | m   |       3 | 1342222222  | 北京    | 1989-10-03 | x@gmail.com |
+| s1101002  | 凌骐骐      | 2211     | f   |       4 | 1342222343  | 山东    | 1989-09-03 | x@gmail.com |
+| s1101003  | 凌石栋      | 2311     | m   |       3 | 1343222343  | 山东    | 1989-09-03 | d@gmail.com |
+| s1101004  | 娃石栋      | 2311     | m   |       2 | 1347222343  | 上海    | 1997-09-03 | w@gmail.com |
+| s1101005  | 里斯        | 2231     | f   |       2 | 1347222443  | 上海    | 1997-09-04 | t@gmail.com |
+| s1101006  | 莉丝        | 2231     | m   |       3 | 1347292443  | 山东    | 1989-09-04 | t@gmail.com |
+| s1101007  | 张四        | 2831     | m   |       3 | 1347292443  | 山东    | 1989-09-04 | j@gmail.com |
+| s1101008  | 凌舞        | 2841     | m   |       3 | 1347242443  | 山东    | 1989-09-24 | f@gmail.com |
++-----------+-------------+----------+-----+---------+-------------+---------+------------+-------------+
+10 rows in set (0.00 sec)
+
+mysql> create table subject(subjectId tinyint primary key not null, subjectName varchar(10), creditHour tinyint, gradeId tinyint)engine=innodb default charset=utfmb4;
+ERROR 1115 (42000): Unknown character set: 'utfmb4'
+mysql> create table subject(subjectId tinyint primary key not null, subjectName varchar(10), creditHour tinyint, gradeId tinyint)engine=innodb default charset=utf8mb4;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select * from grade;
++---------+-----------+
+| gradeid | gradeName |
++---------+-----------+
+|       1 | 一年级    |
+|       2 | 二年级    |
+|       3 | 三年级    |
+|       4 | 四年级    |
++---------+-----------+
+4 rows in set (0.00 sec)
+
+mysql> insert into subject value(1, '设计数据库',60,1);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into subject value(2, '软件开发',30,2);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from transcript;
++----+-----------+-----------+-------+---------------------+
+| id | studentId | subjectId | score | examTime            |
++----+-----------+-----------+-------+---------------------+
+|  1 | s1100001  |         1 |    98 | 2010-10-10 15:00:00 |
+|  2 | s1101000  |         2 |   100 | 2010-10-11 15:00:00 |
+|  3 | s1101001  |         3 |   100 | 2010-10-12 15:00:00 |
+|  4 | s1101002  |         4 |    45 | 2010-10-12 15:00:00 |
+|  5 | s1101003  |         8 |    70 | 2010-10-12 15:00:00 |
+|  6 | s1101004  |         8 |    40 | 2010-10-12 15:00:00 |
+|  7 | s1101005  |         5 |    80 | 2010-10-12 15:00:00 |
+|  8 | s1101006  |         3 |    80 | 2010-10-12 15:00:00 |
+|  9 | s1101007  |         3 |    78 | 2010-10-12 15:00:00 |
+| 10 | s1101008  |         3 |   100 | 2010-10-12 15:00:00 |
++----+-----------+-----------+-------+---------------------+
+10 rows in set (0.00 sec)
+
+mysql> insert into subject value(3, '面向对象',60,3);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into subject value(4, '数学',30,4);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into subject value(5, 'java',30,3);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into subject value(6, 'python',56,2);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into subject value(7, 'C语言',56,3);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into subject value(8, 'C++ 语言',57,4);
+ERROR 1264 (22003): Out of range value for column 'creditHour' at row 1
+mysql> insert into subject value(8, 'C++语言',57,4);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from subject;
++-----------+-----------------+------------+---------+
+| subjectId | subjectName     | creditHour | gradeId |
++-----------+-----------------+------------+---------+
+|         1 | 设计数据库      |         60 |       1 |
+|         2 | 软件开发        |         30 |       2 |
+|         3 | 面向对象        |         60 |       3 |
+|         4 | 数学            |         30 |       4 |
+|         5 | java            |         30 |       3 |
+|         6 | python          |         56 |       2 |
+|         7 | C语言           |         56 |       3 |
+|         8 | C++语言         |         57 |       4 |
++-----------+-----------------+------------+---------+
+8 rows in set (0.00 sec)
+
+mysql> show tables;
++-------------------------+
+| Tables_in_basicpractise |
++-------------------------+
+| grade                   |
+| student                 |
+| subject                 |
+| transcript              |
++-------------------------+
+4 rows in set (0.00 sec)
+
+mysql> alter table grade add workTime tinyint not null default 3;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from grade;
++---------+-----------+----------+
+| gradeid | gradeName | workTime |
++---------+-----------+----------+
+|       1 | 一年级    |        3 |
+|       2 | 二年级    |        3 |
+|       3 | 三年级    |        3 |
+|       4 | 四年级    |        3 |
++---------+-----------+----------+
+4 rows in set (0.00 sec)
+
+mysql> alter table grade drop workTime;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from grade;
++---------+-----------+
+| gradeid | gradeName |
++---------+-----------+
+|       1 | 一年级    |
+|       2 | 二年级    |
+|       3 | 三年级    |
+|       4 | 四年级    |
++---------+-----------+
+4 rows in set (0.01 sec)
+
+mysql> alter table grade add workTime tinyint;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from grade;
++---------+-----------+----------+
+| gradeid | gradeName | workTime |
++---------+-----------+----------+
+|       1 | 一年级    |     NULL |
+|       2 | 二年级    |     NULL |
+|       3 | 三年级    |     NULL |
+|       4 | 四年级    |     NULL |
++---------+-----------+----------+
+4 rows in set (0.00 sec)
+
+mysql> update grade set workTime=3 where gradeid=3;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from grade;
++---------+-----------+----------+
+| gradeid | gradeName | workTime |
++---------+-----------+----------+
+|       1 | 一年级    |     NULL |
+|       2 | 二年级    |     NULL |
+|       3 | 三年级    |        3 |
+|       4 | 四年级    |     NULL |
++---------+-----------+----------+
+4 rows in set (0.00 sec)
+
+mysql> select studentId from transcript where score>100;
+Empty set (0.00 sec)
+
+mysql> select * from transcript;
++----+-----------+-----------+-------+---------------------+
+| id | studentId | subjectId | score | examTime            |
++----+-----------+-----------+-------+---------------------+
+|  1 | s1100001  |         1 |    98 | 2010-10-10 15:00:00 |
+|  2 | s1101000  |         2 |   100 | 2010-10-11 15:00:00 |
+|  3 | s1101001  |         3 |   100 | 2010-10-12 15:00:00 |
+|  4 | s1101002  |         4 |    45 | 2010-10-12 15:00:00 |
+|  5 | s1101003  |         8 |    70 | 2010-10-12 15:00:00 |
+|  6 | s1101004  |         8 |    40 | 2010-10-12 15:00:00 |
+|  7 | s1101005  |         5 |    80 | 2010-10-12 15:00:00 |
+|  8 | s1101006  |         3 |    80 | 2010-10-12 15:00:00 |
+|  9 | s1101007  |         3 |    78 | 2010-10-12 15:00:00 |
+| 10 | s1101008  |         3 |   100 | 2010-10-12 15:00:00 |
++----+-----------+-----------+-------+---------------------+
+10 rows in set (0.00 sec)
+
+mysql> select studentId from transcript where score=100;
++-----------+
+| studentId |
++-----------+
+| s1101000  |
+| s1101001  |
+| s1101008  |
++-----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from student;
++-----------+-------------+----------+-----+---------+-------------+---------+------------+-------------+
+| studentId | studentName | password | sex | gradeId | phone       | address | birth      | email       |
++-----------+-------------+----------+-----+---------+-------------+---------+------------+-------------+
+| s1100001  | 金蝶        | 1234     | f   |       1 | 13148376575 | 山东    | 1995-10-01 | a@gmial.com |
+| s1101000  | 章三        | 1111     | m   |       2 | 13422222222 | 北京    | 1989-10-01 | b@gmail.com |
+| s1101001  | 劳伦斯      | 1211     | m   |       3 | 1342222222  | 北京    | 1989-10-03 | x@gmail.com |
+| s1101002  | 凌骐骐      | 2211     | f   |       4 | 1342222343  | 山东    | 1989-09-03 | x@gmail.com |
+| s1101003  | 凌石栋      | 2311     | m   |       3 | 1343222343  | 山东    | 1989-09-03 | d@gmail.com |
+| s1101004  | 娃石栋      | 2311     | m   |       2 | 1347222343  | 上海    | 1997-09-03 | w@gmail.com |
+| s1101005  | 里斯        | 2231     | f   |       2 | 1347222443  | 上海    | 1997-09-04 | t@gmail.com |
+| s1101006  | 莉丝        | 2231     | m   |       3 | 1347292443  | 山东    | 1989-09-04 | t@gmail.com |
+| s1101007  | 张四        | 2831     | m   |       3 | 1347292443  | 山东    | 1989-09-04 | j@gmail.com |
+| s1101008  | 凌舞        | 2841     | m   |       3 | 1347242443  | 山东    | 1989-09-24 | f@gmail.com |
++-----------+-------------+----------+-----+---------+-------------+---------+------------+-------------+
+10 rows in set (0.00 sec)
+
+mysql> select * from student where birth between '1989-1-1' and '1990-1-1';
++-----------+-------------+----------+-----+---------+-------------+---------+------------+-------------+
+| studentId | studentName | password | sex | gradeId | phone       | address | birth      | email       |
++-----------+-------------+----------+-----+---------+-------------+---------+------------+-------------+
+| s1101000  | 章三        | 1111     | m   |       2 | 13422222222 | 北京    | 1989-10-01 | b@gmail.com |
+| s1101001  | 劳伦斯      | 1211     | m   |       3 | 1342222222  | 北京    | 1989-10-03 | x@gmail.com |
+| s1101002  | 凌骐骐      | 2211     | f   |       4 | 1342222343  | 山东    | 1989-09-03 | x@gmail.com |
+| s1101003  | 凌石栋      | 2311     | m   |       3 | 1343222343  | 山东    | 1989-09-03 | d@gmail.com |
+| s1101006  | 莉丝        | 2231     | m   |       3 | 1347292443  | 山东    | 1989-09-04 | t@gmail.com |
+| s1101007  | 张四        | 2831     | m   |       3 | 1347292443  | 山东    | 1989-09-04 | j@gmail.com |
+| s1101008  | 凌舞        | 2841     | m   |       3 | 1347242443  | 山东    | 1989-09-24 | f@gmail.com |
++-----------+-------------+----------+-----+---------+-------------+---------+------------+-------------+
+7 rows in set (0.00 sec)
+
+mysql> select * from student where studentName='金蝶';
++-----------+-------------+----------+-----+---------+-------------+---------+------------+-------------+
+| studentId | studentName | password | sex | gradeId | phone       | address | birth      | email       |
++-----------+-------------+----------+-----+---------+-------------+---------+------------+-------------+
+| s1100001  | 金蝶        | 1234     | f   |       1 | 13148376575 | 山东    | 1995-10-01 | a@gmial.com |
++-----------+-------------+----------+-----+---------+-------------+---------+------------+-------------+
+1 row in set (0.00 sec)
+
+mysql> select * from student where studentName='金蝶'\g;
++-----------+-------------+----------+-----+---------+-------------+---------+------------+-------------+
+| studentId | studentName | password | sex | gradeId | phone       | address | birth      | email       |
++-----------+-------------+----------+-----+---------+-------------+---------+------------+-------------+
+| s1100001  | 金蝶        | 1234     | f   |       1 | 13148376575 | 山东    | 1995-10-01 | a@gmial.com |
++-----------+-------------+----------+-----+---------+-------------+---------+------------+-------------+
+1 row in set (0.00 sec)
+
+ERROR: 
+No query specified
+
+mysql> select * from student where studentName='金蝶'\G;
+*************************** 1. row ***************************
+  studentId: s1100001
+studentName: 金蝶
+   password: 1234
+        sex: f
+    gradeId: 1
+      phone: 13148376575
+    address: 山东
+      birth: 1995-10-01
+      email: a@gmial.com
+1 row in set (0.00 sec)
+
+ERROR: 
+No query specified
+
+mysql> desc transcript;
++-----------+------------+------+-----+---------+----------------+
+| Field     | Type       | Null | Key | Default | Extra          |
++-----------+------------+------+-----+---------+----------------+
+| id        | tinyint(4) | NO   | PRI | NULL    | auto_increment |
+| studentId | char(8)    | NO   |     | NULL    |                |
+| subjectId | tinyint(4) | NO   |     | NULL    |                |
+| score     | tinyint(4) | YES  |     | NULL    |                |
+| examTime  | datetime   | YES  |     | NULL    |                |
++-----------+------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> select studentId,score from transcript where subjectId=8 and score<60;
++-----------+-------+
+| studentId | score |
++-----------+-------+
+| s1101004  |    40 |
++-----------+-------+
+1 row in set (0.00 sec)
+
+mysql> desc subject;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| subjectId   | tinyint(4)  | NO   | PRI | NULL    |       |
+| subjectName | varchar(10) | YES  |     | NULL    |       |
+| creditHour  | tinyint(4)  | YES  |     | NULL    |       |
+| gradeId     | tinyint(4)  | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from subject where gradeId=3 and creditHour>50;
++-----------+--------------+------------+---------+
+| subjectId | subjectName  | creditHour | gradeId |
++-----------+--------------+------------+---------+
+|         3 | 面向对象     |         60 |       3 |
+|         7 | C语言        |         56 |       3 |
++-----------+--------------+------------+---------+
+2 rows in set (0.00 sec)
+
+mysql> select * from student where studentId='s1101001';
++-----------+-------------+----------+-----+---------+------------+---------+------------+-------------+
+| studentId | studentName | password | sex | gradeId | phone      | address | birth      | email       |
++-----------+-------------+----------+-----+---------+------------+---------+------------+-------------+
+| s1101001  | 劳伦斯      | 1211     | m   |       3 | 1342222222 | 北京    | 1989-10-03 | x@gmail.com |
++-----------+-------------+----------+-----+---------+------------+---------+------------+-------------+
+1 row in set (0.00 sec)
+
+mysql> select * from student where studentId='s1101001'\G;
+*************************** 1. row ***************************
+  studentId: s1101001
+studentName: 劳伦斯
+   password: 1211
+        sex: m
+    gradeId: 3
+      phone: 1342222222
+    address: 北京
+      birth: 1989-10-03
+      email: x@gmail.com
+1 row in set (0.00 sec)
+
+ERROR: 
+No query specified
+
+mysql> select * from student where gradeId=2 and sex='f';
++-----------+-------------+----------+-----+---------+------------+---------+------------+-------------+
+| studentId | studentName | password | sex | gradeId | phone      | address | birth      | email       |
++-----------+-------------+----------+-----+---------+------------+---------+------------+-------------+
+| s1101005  | 里斯        | 2231     | f   |       2 | 1347222443 | 上海    | 1997-09-04 | t@gmail.com |
++-----------+-------------+----------+-----+---------+------------+---------+------------+-------------+
+1 row in set (0.00 sec)
+
+mysql> select * from student where gradeId=2 and sex='f'\G;
+*************************** 1. row ***************************
+  studentId: s1101005
+studentName: 里斯
+   password: 2231
+        sex: f
+    gradeId: 2
+      phone: 1347222443
+    address: 上海
+      birth: 1997-09-04
+      email: t@gmail.com
+1 row in set (0.00 sec)
+
+ERROR: 
+No query specified
+
+mysql> desc subject;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| subjectId   | tinyint(4)  | NO   | PRI | NULL    |       |
+| subjectName | varchar(10) | YES  |     | NULL    |       |
+| creditHour  | tinyint(4)  | YES  |     | NULL    |       |
+| gradeId     | tinyint(4)  | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select cerditHour from subject where subjectName='软件开发';
+ERROR 1054 (42S22): Unknown column 'cerditHour' in 'field list'
+mysql> select creditHour from subject where subjectName='软件开发';
++------------+
+| creditHour |
++------------+
+|         30 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select sujectName from subject;
+ERROR 1054 (42S22): Unknown column 'sujectName' in 'field list'
+mysql> select subjectName from subject;
++-----------------+
+| subjectName     |
++-----------------+
+| 设计数据库      |
+| 软件开发        |
+| 面向对象        |
+| 数学            |
+| java            |
+| python          |
+| C语言           |
+| C++语言         |
++-----------------+
+8 rows in set (0.00 sec)
+
+mysql> select creditHour from subject where subjectName='软件开发' or 
+    -> subjectName='面向对象';
++------------+
+| creditHour |
++------------+
+|         30 |
+|         60 |
++------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from student where address='山东';
++-----------+-------------+----------+-----+---------+-------------+---------+------------+-------------+
+| studentId | studentName | password | sex | gradeId | phone       | address | birth      | email       |
++-----------+-------------+----------+-----+---------+-------------+---------+------------+-------------+
+| s1100001  | 金蝶        | 1234     | f   |       1 | 13148376575 | 山东    | 1995-10-01 | a@gmial.com |
+| s1101002  | 凌骐骐      | 2211     | f   |       4 | 1342222343  | 山东    | 1989-09-03 | x@gmail.com |
+| s1101003  | 凌石栋      | 2311     | m   |       3 | 1343222343  | 山东    | 1989-09-03 | d@gmail.com |
+| s1101006  | 莉丝        | 2231     | m   |       3 | 1347292443  | 山东    | 1989-09-04 | t@gmail.com |
+| s1101007  | 张四        | 2831     | m   |       3 | 1347292443  | 山东    | 1989-09-04 | j@gmail.com |
+| s1101008  | 凌舞        | 2841     | m   |       3 | 1347242443  | 山东    | 1989-09-24 | f@gmail.com |
++-----------+-------------+----------+-----+---------+-------------+---------+------------+-------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from student where address='山东'\G;
+*************************** 1. row ***************************
+  studentId: s1100001
+studentName: 金蝶
+   password: 1234
+        sex: f
+    gradeId: 1
+      phone: 13148376575
+    address: 山东
+      birth: 1995-10-01
+      email: a@gmial.com
+*************************** 2. row ***************************
+  studentId: s1101002
+studentName: 凌骐骐
+   password: 2211
+        sex: f
+    gradeId: 4
+      phone: 1342222343
+    address: 山东
+      birth: 1989-09-03
+      email: x@gmail.com
+*************************** 3. row ***************************
+  studentId: s1101003
+studentName: 凌石栋
+   password: 2311
+        sex: m
+    gradeId: 3
+      phone: 1343222343
+    address: 山东
+      birth: 1989-09-03
+      email: d@gmail.com
+*************************** 4. row ***************************
+  studentId: s1101006
+studentName: 莉丝
+   password: 2231
+        sex: m
+    gradeId: 3
+      phone: 1347292443
+    address: 山东
+      birth: 1989-09-04
+      email: t@gmail.com
+*************************** 5. row ***************************
+  studentId: s1101007
+studentName: 张四
+   password: 2831
+        sex: m
+    gradeId: 3
+      phone: 1347292443
+    address: 山东
+      birth: 1989-09-04
+      email: j@gmail.com
+*************************** 6. row ***************************
+  studentId: s1101008
+studentName: 凌舞
+   password: 2841
+        sex: m
+    gradeId: 3
+      phone: 1347242443
+    address: 山东
+      birth: 1989-09-24
+      email: f@gmail.com
+6 rows in set (0.00 sec)
+
+ERROR: 
+No query specified
+
+mysql> select studentName from student where studentName='凌&';
+Empty set (0.00 sec)
+
+mysql> select studentName from student where studentName='凌%';
+Empty set (0.00 sec)
+
+mysql> select studentName from student where studentName like '凌%';
++-------------+
+| studentName |
++-------------+
+| 凌骐骐      |
+| 凌石栋      |
+| 凌舞        |
++-------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from student where gradeId=1 order by birth;
++-----------+-------------+----------+-----+---------+-------------+---------+------------+-------------+
+| studentId | studentName | password | sex | gradeId | phone       | address | birth      | email       |
++-----------+-------------+----------+-----+---------+-------------+---------+------------+-------------+
+| s1100001  | 金蝶        | 1234     | f   |       1 | 13148376575 | 山东    | 1995-10-01 | a@gmial.com |
++-----------+-------------+----------+-----+---------+-------------+---------+------------+-------------+
+1 row in set (0.00 sec)
+
+mysql> select * from student where gradeId=3 order by birth;
++-----------+-------------+----------+-----+---------+------------+---------+------------+-------------+
+| studentId | studentName | password | sex | gradeId | phone      | address | birth      | email       |
++-----------+-------------+----------+-----+---------+------------+---------+------------+-------------+
+| s1101003  | 凌石栋      | 2311     | m   |       3 | 1343222343 | 山东    | 1989-09-03 | d@gmail.com |
+| s1101006  | 莉丝        | 2231     | m   |       3 | 1347292443 | 山东    | 1989-09-04 | t@gmail.com |
+| s1101007  | 张四        | 2831     | m   |       3 | 1347292443 | 山东    | 1989-09-04 | j@gmail.com |
+| s1101008  | 凌舞        | 2841     | m   |       3 | 1347242443 | 山东    | 1989-09-24 | f@gmail.com |
+| s1101001  | 劳伦斯      | 1211     | m   |       3 | 1342222222 | 北京    | 1989-10-03 | x@gmail.com |
++-----------+-------------+----------+-----+---------+------------+---------+------------+-------------+
+5 rows in set (0.01 sec)
+
+mysql> select * from student where gradeId=3 order by birth\G;
+*************************** 1. row ***************************
+  studentId: s1101003
+studentName: 凌石栋
+   password: 2311
+        sex: m
+    gradeId: 3
+      phone: 1343222343
+    address: 山东
+      birth: 1989-09-03
+      email: d@gmail.com
+*************************** 2. row ***************************
+  studentId: s1101006
+studentName: 莉丝
+   password: 2231
+        sex: m
+    gradeId: 3
+      phone: 1347292443
+    address: 山东
+      birth: 1989-09-04
+      email: t@gmail.com
+*************************** 3. row ***************************
+  studentId: s1101007
+studentName: 张四
+   password: 2831
+        sex: m
+    gradeId: 3
+      phone: 1347292443
+    address: 山东
+      birth: 1989-09-04
+      email: j@gmail.com
+*************************** 4. row ***************************
+  studentId: s1101008
+studentName: 凌舞
+   password: 2841
+        sex: m
+    gradeId: 3
+      phone: 1347242443
+    address: 山东
+      birth: 1989-09-24
+      email: f@gmail.com
+*************************** 5. row ***************************
+  studentId: s1101001
+studentName: 劳伦斯
+   password: 1211
+        sex: m
+    gradeId: 3
+      phone: 1342222222
+    address: 北京
+      birth: 1989-10-03
+      email: x@gmail.com
+5 rows in set (0.00 sec)
+
+ERROR: 
+No query specified
+
+mysql> select * from transcript where subjectId=3 order by score desc;
++----+-----------+-----------+-------+---------------------+
+| id | studentId | subjectId | score | examTime            |
++----+-----------+-----------+-------+---------------------+
+|  3 | s1101001  |         3 |   100 | 2010-10-12 15:00:00 |
+| 10 | s1101008  |         3 |   100 | 2010-10-12 15:00:00 |
+|  8 | s1101006  |         3 |    80 | 2010-10-12 15:00:00 |
+|  9 | s1101007  |         3 |    78 | 2010-10-12 15:00:00 |
++----+-----------+-----------+-------+---------------------+
+4 rows in set (0.00 sec)
+
+mysql> desc subject;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| subjectId   | tinyint(4)  | NO   | PRI | NULL    |       |
+| subjectName | varchar(10) | YES  |     | NULL    |       |
+| creditHour  | tinyint(4)  | YES  |     | NULL    |       |
+| gradeId     | tinyint(4)  | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select max(creditHour) where gradeId=2;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where gradeId=2' at line 1
+mysql> select max(creditHour) from subject where gradeId=2;
++-----------------+
+| max(creditHour) |
++-----------------+
+|              56 |
++-----------------+
+1 row in set (0.01 sec)
+
+mysql> select * from subject;
++-----------+-----------------+------------+---------+
+| subjectId | subjectName     | creditHour | gradeId |
++-----------+-----------------+------------+---------+
+|         1 | 设计数据库      |         60 |       1 |
+|         2 | 软件开发        |         30 |       2 |
+|         3 | 面向对象        |         60 |       3 |
+|         4 | 数学            |         30 |       4 |
+|         5 | java            |         30 |       3 |
+|         6 | python          |         56 |       2 |
+|         7 | C语言           |         56 |       3 |
+|         8 | C++语言         |         57 |       4 |
++-----------+-----------------+------------+---------+
+8 rows in set (0.00 sec)
+
+mysql> select count(studentId) from student where address='北京';
++------------------+
+| count(studentId) |
++------------------+
+|                2 |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> select * from student;
++-----------+-------------+----------+-----+---------+-------------+---------+------------+-------------+
+| studentId | studentName | password | sex | gradeId | phone       | address | birth      | email       |
++-----------+-------------+----------+-----+---------+-------------+---------+------------+-------------+
+| s1100001  | 金蝶        | 1234     | f   |       1 | 13148376575 | 山东    | 1995-10-01 | a@gmial.com |
+| s1101000  | 章三        | 1111     | m   |       2 | 13422222222 | 北京    | 1989-10-01 | b@gmail.com |
+| s1101001  | 劳伦斯      | 1211     | m   |       3 | 1342222222  | 北京    | 1989-10-03 | x@gmail.com |
+| s1101002  | 凌骐骐      | 2211     | f   |       4 | 1342222343  | 山东    | 1989-09-03 | x@gmail.com |
+| s1101003  | 凌石栋      | 2311     | m   |       3 | 1343222343  | 山东    | 1989-09-03 | d@gmail.com |
+| s1101004  | 娃石栋      | 2311     | m   |       2 | 1347222343  | 上海    | 1997-09-03 | w@gmail.com |
+| s1101005  | 里斯        | 2231     | f   |       2 | 1347222443  | 上海    | 1997-09-04 | t@gmail.com |
+| s1101006  | 莉丝        | 2231     | m   |       3 | 1347292443  | 山东    | 1989-09-04 | t@gmail.com |
+| s1101007  | 张四        | 2831     | m   |       3 | 1347292443  | 山东    | 1989-09-04 | j@gmail.com |
+| s1101008  | 凌舞        | 2841     | m   |       3 | 1347242443  | 山东    | 1989-09-24 | f@gmail.com |
++-----------+-------------+----------+-----+---------+-------------+---------+------------+-------------+
+10 rows in set (0.00 sec)
+
+mysql> select count(gradeId) from subject where creditHour<50;
++----------------+
+| count(gradeId) |
++----------------+
+|              3 |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> select sum(creditHour) from subject where gradeId=2;
++-----------------+
+| sum(creditHour) |
++-----------------+
+|              86 |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(score) from transcript where subjectId=8;
++------------+
+| avg(score) |
++------------+
+|    55.0000 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select max(creditHour),min(creditHour) from subject where gradId=3'
+    '> ;
+    '> \c
+    '> 
+    '> \q
+    '> '
+    '> '
+    -> \c
+mysql> select max(creditHour),min(creditHoue) from subject where gradeId=3;
+ERROR 1054 (42S22): Unknown column 'creditHoue' in 'field list'
+mysql> select max(creditHour),min(creditHour) from subject where gradeId=3;
++-----------------+-----------------+
+| max(creditHour) | min(creditHour) |
++-----------------+-----------------+
+|              60 |              30 |
++-----------------+-----------------+
+1 row in set (0.00 sec)
+
+mysql> select count(subjectId) from transcript group by subjectId;
++------------------+
+| count(subjectId) |
++------------------+
+|                1 |
+|                1 |
+|                4 |
+|                1 |
+|                1 |
+|                2 |
++------------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from transcript;
++----+-----------+-----------+-------+---------------------+
+| id | studentId | subjectId | score | examTime            |
++----+-----------+-----------+-------+---------------------+
+|  1 | s1100001  |         1 |    98 | 2010-10-10 15:00:00 |
+|  2 | s1101000  |         2 |   100 | 2010-10-11 15:00:00 |
+|  3 | s1101001  |         3 |   100 | 2010-10-12 15:00:00 |
+|  4 | s1101002  |         4 |    45 | 2010-10-12 15:00:00 |
+|  5 | s1101003  |         8 |    70 | 2010-10-12 15:00:00 |
+|  6 | s1101004  |         8 |    40 | 2010-10-12 15:00:00 |
+|  7 | s1101005  |         5 |    80 | 2010-10-12 15:00:00 |
+|  8 | s1101006  |         3 |    80 | 2010-10-12 15:00:00 |
+|  9 | s1101007  |         3 |    78 | 2010-10-12 15:00:00 |
+| 10 | s1101008  |         3 |   100 | 2010-10-12 15:00:00 |
++----+-----------+-----------+-------+---------------------+
+10 rows in set (0.00 sec)
+
+mysql> select subjectId,count(subjectId) from transcript group by subjectId;
++-----------+------------------+
+| subjectId | count(subjectId) |
++-----------+------------------+
+|         1 |                1 |
+|         2 |                1 |
+|         3 |                4 |
+|         4 |                1 |
+|         5 |                1 |
+|         8 |                2 |
++-----------+------------------+
+6 rows in set (0.00 sec)
+
+mysql> select gradeId,avg(creditHour) from subject group by gradeId;
++---------+-----------------+
+| gradeId | avg(creditHour) |
++---------+-----------------+
+|       1 |         60.0000 |
+|       2 |         43.0000 |
+|       3 |         48.6667 |
+|       4 |         43.5000 |
++---------+-----------------+
+4 rows in set (0.00 sec)
+
+mysql> select gradeId,count(sex) from student group by sex;
+ERROR 1055 (42000): Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'basicpractise.student.gradeId' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+mysql> select gradeId,count(sex) from student group by sex,gradeId;
++---------+------------+
+| gradeId | count(sex) |
++---------+------------+
+|       1 |          1 |
+|       2 |          1 |
+|       4 |          1 |
+|       2 |          2 |
+|       3 |          5 |
++---------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select count(sex) from student group by gradeId,sex;
++------------+
+| count(sex) |
++------------+
+|          1 |
+|          1 |
+|          2 |
+|          5 |
+|          1 |
++------------+
+5 rows in set (0.00 sec)
+
+mysql> select count(sex) from student group by gradeId;
++------------+
+| count(sex) |
++------------+
+|          1 |
+|          3 |
+|          5 |
+|          1 |
++------------+
+4 rows in set (0.00 sec)
+
+mysql> select sex from student;
++-----+
+| sex |
++-----+
+| f   |
+| m   |
+| m   |
+| f   |
+| m   |
+| m   |
+| f   |
+| m   |
+| m   |
+| m   |
++-----+
+10 rows in set (0.00 sec)
+
+mysql> select sex,gradeId from student;
++-----+---------+
+| sex | gradeId |
++-----+---------+
+| f   |       1 |
+| m   |       2 |
+| m   |       3 |
+| f   |       4 |
+| m   |       3 |
+| m   |       2 |
+| f   |       2 |
+| m   |       3 |
+| m   |       3 |
+| m   |       3 |
++-----+---------+
+10 rows in set (0.00 sec)
+
+mysql> select sex,gradeId,count(*) from student group by sex,gradeId;
++-----+---------+----------+
+| sex | gradeId | count(*) |
++-----+---------+----------+
+| f   |       1 |        1 |
+| f   |       2 |        1 |
+| f   |       4 |        1 |
+| m   |       2 |        2 |
+| m   |       3 |        5 |
++-----+---------+----------+
+5 rows in set (0.00 sec)
+
+mysql> 
