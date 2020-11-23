@@ -15,7 +15,7 @@ import java.util.HashMap;
 public class SMSUtil {
 
     public static boolean send(String phoneNumber,String code) {
-        DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", "LTAI4GAdzDbSUV722yGNNcv1", "bvi0hv7dGainXPwzRrBpMBh4QIfcVx");
+        DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", "********", "***********");
         IAcsClient client = new DefaultAcsClient(profile);
 
         CommonRequest request = new CommonRequest();
@@ -48,7 +48,7 @@ public class SMSUtil {
     }
 
     public static boolean loginSMS(String phoneNumber,String code) {
-        DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", "LTAI4GAdzDbSUV722yGNNcv1", "bvi0hv7dGainXPwzRrBpMBh4QIfcVx");
+        DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", "**********", "***********");
         IAcsClient client = new DefaultAcsClient(profile);
 
         CommonRequest request = new CommonRequest();

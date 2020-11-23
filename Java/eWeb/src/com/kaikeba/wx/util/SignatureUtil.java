@@ -85,7 +85,7 @@ public class SignatureUtil {
 	public static Config getConfig(String url) throws Exception {
 		Config config = new Config();
 		//TODO 这里一定要设置, 否则无法使用微信SDK
-		config.setAppid("wxde77ea0af728ce61");
+		config.setAppid("***********");
 		String timestamp = String.valueOf(System.currentTimeMillis() / 1000);
 		config.setTimestamp(timestamp);
 		String nonceStr = String.valueOf(ThreadLocalRandom.current().nextInt(89999999) + 10000000);

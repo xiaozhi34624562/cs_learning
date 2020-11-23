@@ -31,8 +31,8 @@ public class TokenUtil {
 
 
 	private static void setToken() throws Exception {
-		String appid = "wxde77ea0af728ce61";
-		String secret = "5f072b52ca8c289fd6d0d68b5853f55f";
+		String appid = "**************";
+		String secret = "***************";
 		URL url = new URL("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid="+appid+"&secret="+secret);
 		HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
 		conn.getContent();
