@@ -29,7 +29,8 @@
     //4.得到session
     SqlSession session= factory.openSession(); 
     //5.调取sql语句,insert("方法的完整路径")，路径=namespace+id 
-    int rs=session.insert("dao.EmpDao.insertEmp",e); session.commit();
+    int rs=session.insert("dao.EmpDao.insertEmp",e); 
+    session.commit();
     //或者可以用
      Reader r=Resources.getResourceAsReader("mybatis.xml"); 
      SqlSession session = new SqlSessionFactoryBuilder().build(r).openSession(); 
@@ -52,3 +53,90 @@
 
 ## ThreadLocal处理sqlSession
 为每一个使用该变量的线程提供一个变量值的副本，不会和其他线程的副本冲突
+``` java
+class Test{
+  private ThreadLocal<String> str = new ThreadLocal<String>(); 
+  private List<String> list = new ArrayList<String>();
+  class A extends Thread {
+      public void run() {
+          str.set("zhangsan"); 
+          System.out.println("A...." + str.get()); 
+          list.add("xxx"); 
+          System.out.println("A<<<"+list.get(0));
+      }}
+  class B extends Thread {
+      public void run() { 
+        System.out.println("B...." + str.get()); 
+        list.add("xxx"); 
+        System.out.println("B<<<"+list.get(0));
+}}}
+```
+## 给类起别名
+- 起别名
+  ``` java
+  <!—给实体类起别名 --> 
+  <typeAliases>
+  <!--
+  <typeAlias alias="u" type="com.yhp.bean.Users"> 
+  </typeAlias>-->
+  <!--指定哪些包的类可以使用别名,默认别名:类名首字母小写(实际使用的时候，全部小写也可以做结果映射) 
+  <package name="bean"></package>
+  </typeAliases>
+  ```
+- 获得新增数据的id
+  ``` java
+  <insert id="insertStu" parameterType"com.kaikeba.bean.Student" useGenerateKeys="true" keyProperty="studentId">
+    insert into student(studentno, stuname) values(#{studentNo}, #{stuName})
+  </insert>
+  ```
+- log4j日志记录
+  - 添加jar包
+  ``` java
+    <dependency> 
+      <groupId>org.slf4j</groupId> 
+      <artifactId>slf4j-api</artifactId> 
+      <version>1.7.5</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId> 
+      <artifactId>slf4j-log4j12</artifactId> 
+      <version>1.7.12</version>
+    </dependency>
+    <dependency>
+      <groupId>log4j</groupId> 
+      <artifactId>log4j</artifactId> 
+      <version>1.2.17</version>
+    </dependency>
+   ```
+  - 添加log4j.properties文件
+  ``` java
+   log4j.rootLogger=DEBUG, Console 
+   log4j.appender.Console=org.apache.log4j.ConsoleAppender 
+   log4j.appender.Console.layout=org.apache.log4j.PatternLayout 
+   log4j.appender.Console.layout.ConversionPattern=%d [%t] %-5p [%c] - %m%n
+   log4j.logger.java.sql.ResultSet=INFO 
+   log4j.logger.org.apache=INFO 
+   log4j.logger.java.sql.Connection=DEBUG 
+   log4j.logger.java.sql.Statement=DEBUG 
+   log4j.logger.java.sql.PreparedStatement=DEBUG
+   ```
+## MyBatis的复杂查询
+- in 查询
+  - foreach标签中属性说明：
+    - item 每一个元素迭代时候的别名
+    - index 可以不写，指定一个名字，用于表示在迭代过程中，每次迭代到的位置
+    - open 表示该语句以什么开始，
+    - separator 表示在每次进行迭代之间以什么符号作为分隔符 
+    - close 表示以什么结束，
+    - collection 属性是必须指定的list， map（写map的key）， array 
+- 模糊查询
+  - 多个参数传递用map
+  - 动态sql #{}相当于占位符， ${}相当于拼接sql语句
+- 区间查询
+  - between 开始值 and 结束值
+  - <= 使用 `<![CDATA[ <= ]]>`
+- resultMap
+  - 处理表单中的关系（类中的属性名称和数据库中的field名称不一致）
+  - 处理多表的关系
+    - 一对多
+    - 多对一 
