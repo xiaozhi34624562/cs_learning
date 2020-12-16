@@ -136,7 +136,56 @@ class Test{
   - between 开始值 and 结束值
   - <= 使用 `<![CDATA[ <= ]]>`
 - resultMap
-  - 处理表单中的关系（类中的属性名称和数据库中的field名称不一致）
+  - 处理表单中的关系（类中的属性名称和数据库中的field名称不一致，使用resultMap主键用id，其他用result）
   - 处理多表的关系
-    - 一对多
+    - 存的是集合的话，使用Collection子标签加上ofType；存的是一方的话，使用的是association子标签加上javaType
+    - 一对多(多里有集合，一里有对象)
     - 多对一 
+    - 多对多
+    - 一对一
+- PageHelper分页
+  - rowBounds实现内存分
+    - List<Users> usersList = sqlSession.selectList("com.yhp.dao.UsersDao.findall", null, new RowBounds(0, 3));//rowBounds(开始位置,显示条数)
+    - 在sql里面书写带有物理分页的参数来完成物理分页，也可以使用分页插件来完成物理分页
+    - 优缺点
+      - 物理分页每次都访问数据库，逻辑分页只访问一次
+      - 物理分页占用内存少，逻辑分页相对较多
+      - 物理分页数据每次都是最新的，逻辑分页可能存在滞后 
+  - 使用分页插件
+    - 导入jar包
+    - 加入依赖
+    - mybatis.xml中配置插件plugins
+- 缓存
+  - 一级缓存 sqlSession的缓存，自动开启
+  - 二级缓存 在不同的缓存中共享数据，sqlSessionFactory的缓存，需要手动开启，需要在映射文件中配置.
+  - eviction：二级缓存中，缓存的对象从缓存中移除的策略，先进先出； flushInterval：刷新缓存的时间间隔，单位是毫秒； size：缓存对象的个数； readOnly：是否只读
+   ``` java
+    <mapper namespace="接口路径"> 
+      <cache eviction="FIFO"
+        flushInterval="60000" 
+        size="512" 
+        readOnly="true"/>
+    </mapper>
+   ```
+## MyBatis注解
+在mybatis中可以将sql语句通过注解的方式定义在java中，此时配置文件扫描该注解的位置即可，代码如下:`<mapper class="com.dao.StudentDao"></mapper>`
+ ``` 
+@Insert("insert into student(username,password,birthday) values(#{user_name},#{password},# {birthday})")
+@Options(useGeneratedKeys = true,keyProperty = "userid") 
+public int insertstu(Student student);
+```
+
+```
+@Delete("delete from student where userid=#{userid}") 
+public int deleteuser(int userid);
+```
+```
+@Update("update student set username=#{user_name},sex=#{sex} where userid=#{userid}") public int updateuser(Student stu);
+```
+```
+@Select("select * from student") /* 
+@Results({
+@Result(id = true, property = "id", column = "test_id")
+@Result(column = "username",property = "user_name") })*/
+```
+- 可以使用lombok插件
