@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="usersDao" class="com.kaikeba.dao.impl.UsersDaoImpl"></bean>
+    <bean id="service" class="com.kaikeba.service.impl.UsersServiceImpl">
+        <property name="dao" ref="usersDao"></property>
+    </bean>
+    <bean id="user1" class="com.kaikeba.bean.Users" ></bean>
+
+
+
+</beans>
+
