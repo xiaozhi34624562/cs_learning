@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--给类起别名-->
+    <typeAliases>
+        <!--  <typeAlias type="com.yhp.bean.Student" alias="stu1"></typeAlias>-->
+        <package name="com.yhp.bean"></package>
+    </typeAliases>
+    <!--分页插件-->
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+        </plugin>
+    </plugins>
+    <!--连接数据库的环境，default="环境的id"-->
+    <environments default="a1">
+        <environment id="a1">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/xiaozhi?useUnicode=true&amp;characterEncoding=utf-8"/>
+                <property name="username" value="root"/>
+                <property name="password" value="1234"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!-- 指定maper文件的路径（maven项目从resources源文件夹下找资源）-->
+    <mappers>
+        <mapper resource="StudentMapper.xml"/>
+    </mappers>
+</configuration>
