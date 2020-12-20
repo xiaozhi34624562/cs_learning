@@ -191,7 +191,25 @@ word. If the cursor is at the beginning of a word, kill the previous word.
 - Alt-f Move cursor forward one word.
 - Alt-b Move cursor backward one word.
 ## Permissions
-- 
+- id: display user identity
+- ‘-rw-rw-r-- 1 me me 0 2016-03-06 14:52 foo.txt‘
+  - the first character in line
+    - -: a regular file
+    - d: a directory
+    - l: a symbolic link
+    - c: a character special file. This file type refers to a device that handles data as a stream of bytes, such as a terminal or /dev/null.
+    - b: A block special file. This file type refers to a device that handles data in blocks, such as a hard drive or DVD drive.
+  - the following 9 characters `owner group world' made of rwx 
+- chmod: change a file's mode
+  - only the file owner or superuser can change the mode of a file or directory
+  - x=1, w=2, r=4 e.g. `chmod 600 foo.txt` owner group world rw------- 
+  - u g o a : user group other all e.g. u+x `chomd u+x foo.txt`
+- umask: set the default file permissions
+- su: run a shell as another user
+- sudo: execute a command as another user
+- chown: change a file's owner
+- chgrp: change a file's group ownership
+- passwd: change a user's password
 ## Processes
 ## notation
 - cd [-L|[-P[-e]]] [dir] : When square brackets appear in the description of a command's syn- tax, they indicate optional items. A vertical bar character indicates mutually exclusive items. 
