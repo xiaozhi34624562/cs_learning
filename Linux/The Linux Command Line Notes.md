@@ -110,8 +110,89 @@ by regular users.
   - `ln -s item link` a symbolic link,  contains a text pointer to the referenced file or directory, if we write something to the symbolic link, the refer- enced file is written to. However when we delete a symbolic link, only the link is deleted, not the file itself 
   - difference:A hard link may not reference a directory; A hard link cannot reference a file outside its own file system
 ## Working with Commands
+- type: indicate how a command line name is interpreted
+- which: display which excutable program will be executed, only works for excutable programs, not builtin not aliases
+- help: get help for shell buildins
+- man: diaplay a command's manual page
+  - man section search_term
+  1. User commands
+  2. Programming interfaces for kernel system calls
+  3. Programming interfaces to the C library
+  4. Special files such as device nodes and drivers
+  5. File formats
+  6. Games and amusements such as screen savers
+  7. Miscellaneous
+  8. System administration commands
+- apropos: diaplay a list of appropriate commands
+- info: diaplay a command's info entry
+- whatis: diaplay one-line manual page descriptions
+- alias: create an alias for a command
+  - alias name='string' e.g. alias foo='cd /usr; ls;'
+  - to remove alias: unalias foo;
+- What exactly are commands?
+  - **an executable program** : like all those files we saw in /usr/bin.
+  - **a command built into the shell itself**: bash supports a number of commands internally called shell builtins
+  - **a shell function** : Shell functions are miniature shell scripts incorporated into the environment. 
+  - **an alias** : Aliases are commands that we can define ourselves, built from other commands.
 ## Redirection
+- redirecting
+  - \> create a new file or overwritten
+  - \>> append to the original file
+  - **Redirecting Standard Error** file streams as standard input, output and error, the shell references them internally as file descriptors 0, 1, and 2, respectively. The shell provides a notation for redirecting files using the file descriptor number; e.g.  ls -l /bin/usr 2> ls-error.txt
+  - **Redirecting Standard Output and Standard Error to One File** can use `ls -l /bin/usr > ls-output.txt 2>&1` or `ls -l /bin/usr &> ls-output.txt`
+  - Disposing of Unwanted Output `ls -l /bin/usr 2> /dev/null`
+- cat: concatenate files
+  - diaplay short text files and can be used to **join files** together `cat movie.mpeg.0* > movie.mpeg`
+  - use 'cat' to create a file e.g. 'cat > lazy_dog.txt text... Ctrl+d' 
+  - 'cat < lazy_dog.txt' we change the source of standard input from the key- board to the file lazy_dog.txt
+- pipelines(|): command1 | command2; the standard output of one command can be piped into the standard input of another
+  - difference between > and |:
+    - command1 > file1; command1 | command2
+- sort: sort lines of text e.g. 'ls /bin /usr/bin | sort | less'
+- uniq: report or omit repeated lines 'ls /bin /usr/bin | sort | uniq | less' avoid the duplicate name; 'ls /bin /usr/bin | sort | uniq -d | less' only show the duplicate files
+- grep: print lines matching a pattern
+  - grep pattern [file...]
+  - it prints out the lines containing it. e.g. 'ls /bin /usr/bin | sort | uniq | grep zip'
+  - -i: cause grep to ignore case when performing the search
+  - -v: tells grep to print only those lines that do not match the pattern
+- wc: print lines, word, and byte counts for each file
+- head: output the first ten lines of a file, but can be adjusted with the -n option 'head -n 5 ls-output.txt'
+- tail: output the last ten lines of a file, but can be adjusted with the -n option 'tail -n 5 ls-output.txt'
+- tee: read from standard input and write to standard output and files
 ## Seeing the World as the Shell Sees It
+- echo
+  - `echo *` will show all filenames in this directory
+  - `echo *s` will show all filenames ending with s in this directory
+  - `echo .[!.]*` find the hidden file except '.' and '..'
+  - `echo $((1+2))` used as a calculator
+  - 'echo {01..05}' output is 01 02 03 04 05
+  - 'echo a{A{1,2},B{3,4}}b' output is aA1b aA2b aB3b aB4b 
+  - 'ls -l $(which cp)' output is '-rwxr-xr-x 1 root root 71516 2007-12-05 08:58 /bin/cp'
+
 ## Advanced Keyboard Tricks
+- clear: clear the screen
+- history: display the contents of the history list
+- Ctrl-a Move cursor to the beginning of the line
+- Ctrl-e Move cursor to the end of the line.
+- Ctrl-f Move cursor forward one character; same as the right arrow key.
+- Ctrl-b Move cursor backward one character; same as the left arrow key.
+- Ctrl-l Clear the screen and move the cursor to the top-left corner. The clear command does the same thing
+- Ctrl-d delete the character at the cursor location
+- Ctrl-t transpose the character at the cursor location with the one preceding it
+- Ctrl-k Kill text from the cursor location to the end of line
+- Ctrl-u Kill text from the cursor location to the beginning of line
+- Ctrl-y Yank text from the kill-ring and insert it at the cursor location.
+- Alt-d Kill text from the cursor location to the end of the current word. 
+- Alt-Backspace Kill text from the cursor location to the beginning of the current
+word. If the cursor is at the beginning of a word, kill the previous word.
+- Alt-t Transpose the word at the cursor location with the one preceding it.
+- Alt-l Convert the characters from the cursor location to the end of the word to lowercase.
+- Alt-u Convert the characters from the cursor location to the end of the word to uppercase.
+- Alt-f Move cursor forward one word.
+- Alt-b Move cursor backward one word.
 ## Permissions
+- 
 ## Processes
+## notation
+- cd [-L|[-P[-e]]] [dir] : When square brackets appear in the description of a command's syn- tax, they indicate optional items. A vertical bar character indicates mutually exclusive items. 
+- Many software packages installed on our system have documentation files residing in the /usr/share/doc directory. Most of these are stored in plain text format and can be viewed with less. Some of the files are in HTML format and can be viewed with a web browser. We may encounter some files ending with a “.gz” extension. This indicates that they have been compressed with the gzip compression program. The gzip package in- cludes a special version of less called zless that will display the contents of gzip- compressed text files.
