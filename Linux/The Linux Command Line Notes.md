@@ -250,17 +250,57 @@ word. If the cursor is at the beginning of a word, kill the previous word.
     - S: sleeping. the process is not running; rather, it is waiting for an event, such as a keystroke or network packet
     - D: Uninterruptible sleep. The process is waiting for I/O such as a disk drive.
     - T: Stopped
-    - Z: this is a child process that has terminated but has not been clean up by its parent 
+    - Z: A defunct or “zombie” process. this is a child process that has terminated but has not been clean up by its parent 
     - <: A high-priority process. 
     - N: A low-priority process
-- top: display task
+  - `ps aux` BSD style ps column headers
+    - USER: user ID
+    - %CPU: cpu usage
+    - %MEN: memory usage
+    - VSZ: virtual memory size
+    - RSS: resident set size, the amount of physical memory (RAM) the process is using in kilobytes
+    - START: time when the process started
+- top: display task, dynamic view and spend less computer resource
+  - 14:59:20  the current time
+  - top the  name of the program
+  - up 6:30  uptime, the machine booted time
+  - 2 users there are two users
+  - load average Load average refers to the number of processes that are waiting to run, that is, the number of processes that are in a runnable state and are sharing the CPU. Three values are shown, each for a different period of time. The first is the average for the last 60 seconds, the next the previous 5 minutes, and finally the previous 15 minutes. Values less than 1.0 indicate that the machine is not busy.
+  - Cpu(s) This row describes the character of the activities that the CPU is performing.
+    - 0.7%us 0.7 percent of the CPU is being used for user processes. This means processes outside the kernel.
+    - 1.0%sy 1.0 percent of the CPU is being used for system (kernel) processes.
+    - 0.0%ni 0.0 percent of the CPU is being used by “nice” (low-priority) processes.
+    - 98.3%id 98.3 percent of the CPU is idle.
+    - 0.0%wa 0.0 percent of the CPU is waiting for I/O.
+  - Mem: This shows how physical RAM is being used
+  - Swap This shows how swap space (virtual memory) is being used.
 - jobs: list active jobs
+  - putting a process in the background: activityName $
+  - A process in the background is immune from terminal keyboard input, including any at- tempt to interrupt it with Ctrl-c(send a signal called INT(interrupt))
+  - return a process to the foreground, use the fg command in this way:`jobs` then `fg %1()job number`
+  - stoppping a process:(To stop a foreground process and place it in the background) Ctrl-z(send a signal called TSTP(terminal stop))
+  - resume the pro- gram's execution in the background with the bg command `bg %1`
 - bg: place a job in the background
 - fg: place a job in the foreground
-- kill: send a signal to a process
-- killall: kill process by name
-- shutdown: shutdown or reboot the system
-- 
+- kill `kill [-signal] PID...`: send a signal to a process
+  - 1 HUP restart daemon programs
+  - 2 INT interrupt
+  - 9 kill the kernel immediately terminates the process and cannot save its work
+  - 15 TERM terminate default signal by kill command
+  - 18 CONT continue, restore a process after a STOP or TSTP signal
+  - 19 STOP stop,  This signal causes a process to pause without terminating. signal cannot be ignored.
+  - 20 TSTP terminal stop like Ctrl-z, signal can be ignored
+  - `kill -1 13546`
+- killall: kill process by name under superuser
+- shutdown: shutdown or reboot the system `sudo shutdown -r now`
+  - -H --halt: hale the machine
+  - -P --poweroff: power-off the machine
+  - -r --reboot: reboot the machine
+  - -k: do not halt , power-off, reboot, just write wall message
 ## notation
 - cd [-L|[-P[-e]]] [dir] : When square brackets appear in the description of a command's syn- tax, they indicate optional items. A vertical bar character indicates mutually exclusive items. 
 - Many software packages installed on our system have documentation files residing in the /usr/share/doc directory. Most of these are stored in plain text format and can be viewed with less. Some of the files are in HTML format and can be viewed with a web browser. We may encounter some files ending with a “.gz” extension. This indicates that they have been compressed with the gzip compression program. The gzip package in- cludes a special version of less called zless that will display the contents of gzip- compressed text files.
+- pstree: Outputs a process list arranged in a tree-like pattern showing the parent-child relationships between processes
+- vmstat: Outputs a snapshot of system resource usage including, memory, swap, and disk I/O. To see a continuous display, follow the command with a time delay (in seconds) for updates. Here’s an example: vmstat 5. Terminate the output with Ctrl-c.
+- xload: A graphical program that draws a graph showing system load over time.
+- tload: Similar to the xload program but draws the graph in the terminal. Terminate the output with Ctrl-c.
