@@ -206,11 +206,61 @@ word. If the cursor is at the beginning of a word, kill the previous word.
   - u g o a : user group other all e.g. u+x `chomd u+x foo.txt`
 - umask: set the default file permissions
 - su: run a shell as another user
+  - su [-[l]] [user] '-' means a login shell
+  - su - : login as superuser
+  - su - 'command' : execute a single command rather than starting a new interactive command e.g. su -c 'ls -l /root/*' 
 - sudo: execute a command as another user
+- differences between su and sudo
+  - sudo does not open a new shell
+  - sudo does not load another user's environment
 - chown: change a file's owner
+  - chown [owner][:[group]] file
+  - e.g. bob Changes ;the ownership of the file from its current owner to user bob.
+  - e.g. bob:users ;Changes the ownership of the file from its current owner to user bob and changes the file group owner to group users.
+  - e.g. :admins ;Changes the group owner to the group admins. The file owner is unchanged.
+  - e.g. bob: ;Changes the file owner from the current owner to user bob and changes the group owner to the login group of user bob.
+  ```
+  [janet@linuxbox ~]$ sudo cp myfile.txt ~tony 
+  Password:
+  [janet@linuxbox ~]$ sudo ls -l ~tony/myfile.txt
+  -rw-r--r-- 1 root root root 2018-03-20 14:30 /home/tony/myfile.txt 
+  [janet@linuxbox ~]$ sudo chown tony: ~tony/myfile.txt 
+  [janet@linuxbox ~]$ sudo ls -l ~tony/myfile.txt
+  -rw-r--r-- 1 tony tony tony 2018-03-20 14:30 /home/tony/myfile.txt
+  ```
 - chgrp: change a file's group ownership
 - passwd: change a user's password
+  - passwd [user]
+- adduser
+- useradd
+- groupadd 
 ## Processes
+- ps: report a snapshot of current process
+  ```
+    [me@linuxbox ~]$ ps
+    PID TTY       TIME CMD
+  5198 pts/1     00:00:00 bash
+  10129 pts/1     00:00:00 ps
+  ```
+  - PID is process id; 
+  - TTY is "teletype", referring to the controlling terminal for the process, '?' means no controlling terminal; 
+  - TIME the amount of CPU time consumed by the process 
+  - STAT is "state" `ps x`
+    - R: Running. This means that the process is running or ready to run.
+    - S: sleeping. the process is not running; rather, it is waiting for an event, such as a keystroke or network packet
+    - D: Uninterruptible sleep. The process is waiting for I/O such as a disk drive.
+    - T: Stopped
+    - Z: this is a child process that has terminated but has not been clean up by its parent 
+    - <: A high-priority process. 
+    - N: A low-priority process
+- top: display task
+- jobs: list active jobs
+- bg: place a job in the background
+- fg: place a job in the foreground
+- kill: send a signal to a process
+- killall: kill process by name
+- shutdown: shutdown or reboot the system
+- 
 ## notation
 - cd [-L|[-P[-e]]] [dir] : When square brackets appear in the description of a command's syn- tax, they indicate optional items. A vertical bar character indicates mutually exclusive items. 
 - Many software packages installed on our system have documentation files residing in the /usr/share/doc directory. Most of these are stored in plain text format and can be viewed with less. Some of the files are in HTML format and can be viewed with a web browser. We may encounter some files ending with a “.gz” extension. This indicates that they have been compressed with the gzip compression program. The gzip package in- cludes a special version of less called zless that will display the contents of gzip- compressed text files.
