@@ -37,6 +37,10 @@
 - `git diff HEAD HEAD~1` the diff between current and last one
 - `git diff HEAD HEAD~2` the diff between current and last two
 - `git diff --cached` diff between commited and cached 
+- `git diff` show diff between working tree and cached
+- `git diff -- filename` diff in target file
+- `git diff branch1 branch2` show all diff between branch1 and branch2
+- `git diff branch1 branch2 -- file` show diff in file of branch1 and branch2
 ## delete/add a branch
 - `git branch -D branchName` will delete a branch
 - `git branch newBranchName` make a new branch based on the current branch
@@ -44,4 +48,19 @@
 ## change the commit
 - `git commit --amend` change the latest commit
 - `git rebase -i numberOfTargetslastCommitNumber` change the target commit or make servel commits into one
-  
+## reset file in cached
+- `git reset HEAD` delete all in cached
+- `git reset HEAD -- filename` delete file in cached
+## reset all in working Directory
+- `git checkout -- filename` discard changes in the file in working tree
+## delete servel commits
+- `git reset --hard targetCommitNumber` delete commit between latest and target
+- `git reset --hard HEAD` working directory back to commited directory
+## delete file
+- `git rm file`
+## put the file in another place in order to deal with it later
+- `git stash`
+- `git stash apply` use the file and the file still backed up in stash
+- `git stash pop` use the file, file no longer in stash
+## set file not in git
+- `vim .gitignore` write file name in this file so that file will not be controlled by git
