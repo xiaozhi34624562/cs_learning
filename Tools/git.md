@@ -66,3 +66,9 @@
 - `git stash pop` use the file, file no longer in stash
 ## set file not in git
 - `vim .gitignore` write file name in this file so that file will not be controlled by git
+## push file
+- `git push -u origin featureA` push file in branch featureA to remote featureA
+- `git push -u origin featureB:featureBee` push file from featureA to remote featureBee  
+## fetch file
+- `git fetch <remote>` get file from remote
+- `git pull <remote>` get file from remote and merge file 
