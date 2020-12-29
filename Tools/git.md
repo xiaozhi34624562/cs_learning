@@ -26,6 +26,8 @@
   - `git branch -v`
 - create branch
   - `git checkout -b temp 4323424` 
+- show diff in every log commit
+  - `git log -p -2` show two commit and diff during commit 
 ## .git insight
 - HEAD (equal to git checkout user)
 - config (user name and user email, equal to git config --local user.name/email '')
