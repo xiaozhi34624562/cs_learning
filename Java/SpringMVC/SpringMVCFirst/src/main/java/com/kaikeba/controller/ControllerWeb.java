@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -86,6 +87,19 @@ public class ControllerWeb {
         return "success";
     }
 
+    @RequestMapping("/date3")
+    public String getDate1(String birthday) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+        try {
+            date = format.parse(birthday);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        System.out.println(date);
+        return "success";
+    }
+
     /**
      * 获取日期特殊方式 @DateTimeFormat(pattern = "yyyy-MM-dd")
      */
@@ -129,7 +143,7 @@ public class ControllerWeb {
     }
 
     /**
-     * 方法4，Model model
+     * 方法4，ModelAndView
      * 返回参数，从后台到前台
      */
     @RequestMapping("/getParameters4")
@@ -141,6 +155,14 @@ public class ControllerWeb {
         return modelAndView;
     }
 
+    /**
+     * 设置session，需要在类上面添加
+     * 使用@sessionAttributes("key值")//写的是ModelMap中定义的key值
+     * 注:该注解和ModelMap结合使用,当使用ModelMap存值时,会在session中同时存储一份数据
+     * 设置弹窗，此时的返回值必须为空
+     * @param map
+     * @param response
+     */
     @RequestMapping("/sessionAndAlert")
     public void useSessionAndAlert(ModelMap map, HttpServletResponse response) {
         String name = "sessionAttributes";
@@ -154,6 +176,10 @@ public class ControllerWeb {
         }
     }
 
+    /**
+     * 返回json格式
+     * @return
+     */
     @RequestMapping("/getuser")
     public @ResponseBody  User getuser(){
         User users = new User();

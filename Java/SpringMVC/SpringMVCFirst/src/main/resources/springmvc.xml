@@ -24,9 +24,14 @@ http://www.springframework.org/schema/mvc
         <property name="suffix" value=".jsp"></property>
     </bean>
 
+<!--    扫描mvc注释-->
     <mvc:annotation-driven></mvc:annotation-driven>
+
+<!--    允许静态资源访问方法一-->
     <!-- <mvc:resources mapping="/img/**" location="/img/" ></mvc:resources>
      <mvc:resources mapping="/css/**" location="/css/" ></mvc:resources>-->
+
+<!--    允许静态资源访问方法二-->
     <mvc:default-servlet-handler></mvc:default-servlet-handler>
 
 <!--    &lt;!&ndash;添加拦截器&ndash;&gt;-->
@@ -34,9 +39,11 @@ http://www.springframework.org/schema/mvc
 <!--        <bean class="com.kaikeba.util.MyInterceptor1"></bean>-->
 <!--        <bean class="com.kaikeba.util.MyInterceptor2"></bean>-->
 <!--    </mvc:interceptors>-->
-<!--    &lt;!&ndash;文件上传对象&ndash;&gt;-->
-<!--    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">-->
-<!--        <property name="maxUploadSize" value="9999999999"></property>-->
-<!--        <property name="defaultEncoding" value="UTF-8"></property>-->
-<!--    </bean>-->
+<!--    -->
+
+    <!--文件上传对象-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="9999999999"></property>
+        <property name="defaultEncoding" value="UTF-8"></property>
+    </bean>
 </beans>

@@ -24,7 +24,13 @@
 <br><br><br>
 
 <h1>日期获取的原始方式</h1>
-<form action="/date1" name="date" method="get">
+<form action="/date1" name="date" method="post">
+    date<input type="text" name="birthday"><br>
+    <input type="submit">
+</form>
+
+<h1>日期获取的字符串方式</h1>
+<form action="/date3" method="post">
     date<input type="text" name="birthday"><br>
     <input type="submit">
 </form>
