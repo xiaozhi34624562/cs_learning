@@ -1,0 +1,33 @@
+# Spring Boot
+## spring的基础
+- 初始化Spring的应用
+  - 使用spring-boot-starter的好处
+    - 构建文件会显著减少，易于管理，不必为每个所需的依赖库都声明依赖
+    - 我们能够根据它们所提供的功能来思考依赖，而不是根据库的名称。如果是开发Web应用，那么你只需要添加webstarter就可以了，而不必添加一堆单独的库再编写Web应用
+    - 我们不必再担心库版本的问题。你可以直接相信给定版本的Spring Boot，传递性引入的库的版本是兼容的。
+  - @SpringBootApplication注解，包含了三部分
+    - @SpringBootConfiguration：将该类声明为配置类，是@Configuration注解的特殊形式
+    - @EnableAutoConfiguration：启用spring boot的自动配置
+    - @ComponentScan：启动组件扫描，这样我们可以通过像@Component，@Controller，@Service止痒的注解声明其他类，Spring会自动发现他们并将它们注册为spring应用上下文中的组件
+  - @SpringBootTest 和 @RunWith(SpringRunner.class)
+    - runWith是JUnit的注解，提供一个测试运行器（runner）来指导JUnit如何运行测试，SpringRunner是SpringJUnit4ClassRunner的别名
+    - SpringBootTest会告诉JUnit在启动测试的时候要添加上Spring Boot的功能
+  - @WebMvcTest：为测试Spring MVC应用提供Spring环境的支持，测试类被注入一个MockMvc，能够让测试实现mockup。
+  - Spring Boot DevTools 的作用
+    - 代码变更后应用会自动重启（DevTools运行时，应用程序会被加载到JVM两个独立的类加载器，其中一个加载代码，属性文件等，另一个加载依赖的库，探测到变化时，只会重新加载前项，可以减少启动时间）
+    - 当面向浏览器的资源（如模板、JavaScript、样式表）等发生变化时，会自动刷新浏览器
+    - 自动禁用模板缓存（使用LiveReload服务器，自动刷新浏览器）
+    - 如果使用H2数据库的话，内置了H2控制台
+## 开发web应用
+- 展现信息
+  - @Controller：会被识别为控制器。识别后会自动创建一个实例，并将该实例作为Spring应用上下文中的bean
+  - @RequestMapping("url")：可以使用在类或者方法上面，可以和@GetMapping配合使用。GetMapping等效于RequestMapping(method=RequestMethod.GET)。有PostMapping, PutMapping, DeleteMapping, PatchMapping
+- 处理表单提交
+- 校验信息
+  - @NotNull
+  - @Size(min=5. message="not valid info")
+  - @NotBlank（message="message is required)
+  - @CreditCardNumber(message="not a valid credit card number")
+  - @Pattern(regexp="^(0[1-9]|1[0-2])([\\/])([1-9][0-9])$")
+  - @Digits(integer=3, fraction=0, message="invalid CVV")
+  - 需要在controller方法的参数前添加一个@Valid， e.g.`public String getInfo(@Valid Student student, Errors errors){  if (errors.hasErrors) return "xxx";}`
