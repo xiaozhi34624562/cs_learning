@@ -1,4 +1,4 @@
-# Spring Boot
+# Spring Boot 实战笔记
 ## spring的基础
 - 初始化Spring的应用
   - 使用spring-boot-starter的好处
