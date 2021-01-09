@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kaikeba.dao.BillDao">
+    <resultMap id="b1" type="com.kaikeba.bean.Bill">
+        <id column="id" property="id"></id>
+        <result column="title" property="title"></result>
+        <result column="bill_time" property="bill_time"></result>
+        <result column="type_id" property="type_id"></result>
+        <result column="price" property="price"></result>
+        <result column="explains" property="explains"></result>
+        <association property="billType" javaType="com.kaikeba.bean.BillType">
+            <id property="id" column="id"></id>
+            <result property="name" column="name"></result>
+        </association>
+    </resultMap>
+<!--    <select id="selectAll" resultMap="b1">-->
+<!--        select * from bill, bill_type-->
+<!--        <if test="bill.type_id != null">-->
+<!--            <where>-->
+<!--                bill.type_id = bill_type.id-->
+<!--            </where>-->
+<!--        </if>-->
+<!--    </select>-->
+    <select id="selectByType" resultMap="b1">
+        select * from bill, bill_type where bill.type_id = bill_type.id and bill.type_id = #{type}
+    </select>
+    <select id="selectByTypeAndDate" resultType="com.kaikeba.bean.Bill">
+        select * from bill
+        where 1 = 1
+        <if test="type_id != null">
+            and type_id = #{type_id}
+        </if>
+        <if test="start != null">
+            and bill_time &gt;= #{start}
+        </if>
+        <if test="end != null">
+            and bill_time &lt;= #{end}
+        </if>
+    </select>
+</mapper>
