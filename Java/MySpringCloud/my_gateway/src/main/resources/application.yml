@@ -1,0 +1,45 @@
+#  https://cloud.spring.io/spring-cloud-static/spring-cloud-gateway/2.1.1.RELEASE/single/spring-cloud-gateway.html
+
+
+server:
+  port: 10010
+spring:
+  application:
+    name: gateway-api
+  cloud:
+    gateway:
+      routes:
+        - id: account-service-route
+#          uri: http://127.0.0.1:9091
+          uri: lb://account-server:9091
+          predicates:
+            - Path=/**
+          filters:
+            - PrefixPath=/bill
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: /**
+  #        # 这种写法或者下面的都可以，*表示全部
+  #          allowedOrigins:
+  #            - "http://docs.spring.io"
+            allowedMethods:
+              - GET
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10088/eureka
+  instance:
+    prefer-ip-address: true
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 6000 #服务降级超时时间，默认1S
+ribbon:
+  ConnectTimeout: 1000 # 连接超时时长
+  ReadTimeout: 2000 # 数据通信超时时长
+  MaxAutoRetries: 0 # 当前服务器的重试次数
+  MaxAutoRetriesNextServer: 0 # 重试多少次服务

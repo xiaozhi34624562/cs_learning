@@ -1,0 +1,18 @@
+server:
+  port: ${port:10088}
+spring:
+  application:
+    name: eureka_server
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10088/eureka
+#    不注册自己
+    register-with-eureka: false
+#    不拉取服务
+    fetch-registry: false
+  server:
+#    关闭自我保护
+    enable-self-preservation: false
+#    服务失效剔除时间间隔
+    eviction-interval-timer-in-ms: 10000

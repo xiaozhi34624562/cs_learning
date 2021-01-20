@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>userList</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}"></link>
+    <script type="text/javascript" th:src="@{/js/My97DatePicker/WdatePicker.js}"></script>
+    <script type="text/javascript" src="/js/My97DatePicker/lang/zh-cn.js"></script>
+    <script type="text/javascript" th:src="@{/js/jquery/jquery-1.10.2.min.js}"></script>
+</head>
+<body class="container">
+<br/>
+<h1>账单列表</h1>
+<br/><br/>
+<div class="with:80%">
+    <form class="form-inline" id="qf"   th:action="@{/bill/list-page}"  method="post">
+        <input type="hidden" name="pageNum" id="pageNum" th:value="${pageInfo.pageNum}">
+        <input type="hidden" name="pageSize" id="pageSize" th:value="${pageInfo.pageSize}">
+
+        <div class="form-group">
+            <label for="typeId" class="control-label">类型</label>
+            <select name="type_id" id="typeId" class="form-control">
+                <option value="-1">全部</option>
+                <option th:each="t : ${types}" th:value="${t.id}" th:text="${t.name}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="date1" class="control-label" >开始时间</label>
+            <input type="text" class="form-control" name="start" id="date1" placeholder="开始时间" onclick="WdatePicker()"/>
+        </div>
+        <div class="form-group">
+            <label for="date2" class="control-label">结束时间</label>
+            <input type="text" class="form-control" name="end"  id="date2" placeholder="结束时间" onclick="WdatePicker()"/>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="查询" class="btn btn-info" />
+            &nbsp; &nbsp;
+            <input type="reset" value="重置" class="btn btn-info" />
+            &nbsp; &nbsp;
+            <a href="/bill/add" th:href="@{/bill/add}" class="btn btn-info">添加</a>
+        </div>
+    </form>
+</div>
+<br/>
+
+<div class="with:80%">
+    <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>标题</th>
+            <th>时间</th>
+            <th>金额</th>
+            <th>类别</th>
+            <th>说明</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+		<tr th:each=" bill, status: ${pageInfo.list}" th:style="${status.even} ? 'background-color:#A3C6C8'" th:object="${bill}">
+            <td th:text="*{id}">*</td>
+            <td th:text="*{title}">*</td>
+            <td th:text="*{bill_time} ? ${#dates.format(bill.bill_time, 'yyyy-MM-dd')}">*</td>
+            <td th:text="*{price}">*</td>
+            <td th:switch="*{type_id}">
+                <span th:case="1">收入</span>
+                <span th:case="2">支出</span>
+                <span th:case="3">借入</span>
+                <span th:case="4">借出</span>
+                <span th:case="*"></span>
+            </td>
+            <td th:text="*{explains}">*</td>
+            <td>
+                <a th:href="|/bill/delete/*{id}|">删除</a>
+                <a th:href="|/bill/toUpdate/*{id}|">修改</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<ul class="pagination">
+    <li><button class="btn btn-default" id="first">第一页</button></li>
+    <li><button class="btn btn-default" id="prev">上一页</button></li>
+    <li th:each="p : ${pageInfo.navigatepageNums}">
+    <button class="btn btn-default" name="pn" th:text="${p}" th:disabled="(${p} == ${pageInfo.pageNum})"></button>
+    </li>
+    <li><button class="btn btn-default" id="next">下一页</button></li>
+    <li><button class="btn btn-default" id="last">最后页</button></li>
+</ul>
+
+<script th:inline="javascript">
+    $(function(){
+        var pageNum = [[${pageInfo.pageNum}]];
+        var pageCount = [[${pageInfo.pages}]];
+        var hasNextPage = [[${pageInfo.hasNextPage}]];
+        var hasPreviousPage = [[${pageInfo.hasPreviousPage}]];
+
+        $("#next").click(function () {
+            $("#pageNum").val(pageNum + 1);
+            $("#qf").submit();
+        });
+
+        $("#prev").click(function () {
+            $("#pageNum").val(pageNum - 1);
+            $("#qf").submit();
+        });
+
+        $("#first").click(function () {
+            $("#pageNum").val(1);
+            $("#qf").submit();
+        });
+
+        $("#last").click(function () {
+            $("#pageNum").val(pageCount);
+            $("#qf").submit();
+        });
+
+        if (!hasPreviousPage) {
+            $("#prev").prop("disabled", true);
+            $("#first").prop("disabled", true);
+        };
+
+        if (!hasNextPage) {
+            $("#next").prop("disabled", true);
+            $("#last").prop("disabled", true);
+        };
+
+        $("button[name='pn']").click(function(){
+            $("#pageNum").val($(this).html());
+            $("#qf").submit();
+        });
+
+    })
+</script>
+<!-- TODO 分页工具类-->
+
+<!-- TODO 分页的js代码-->
+
+</body>
+</html>

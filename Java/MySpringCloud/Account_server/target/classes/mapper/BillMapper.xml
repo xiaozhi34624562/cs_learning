@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wmz.server_service.dao.BillDao">
+<!--    <resultMap id="b1" type="com.kaikeba.bean.Bill">-->
+<!--        <id column="id" property="id"></id>-->
+<!--        <result column="title" property="title"></result>-->
+<!--        <result column="bill_time" property="bill_time"></result>-->
+<!--        <result column="type_id" property="type_id"></result>-->
+<!--        <result column="price" property="price"></result>-->
+<!--        <result column="explains" property="explains"></result>-->
+<!--        <association property="billType" javaType="com.kaikeba.bean.BillType">-->
+<!--            <id property="id" column="id"></id>-->
+<!--            <result property="name" column="name"></result>-->
+<!--        </association>-->
+<!--    </resultMap>-->
+
+    <sql id="sqlSession">
+        select
+        b.id as id,
+        b.title as title,
+        b.bill_time as bill_time,
+        b.type_id as type_id,
+        b.price as price,
+        b.explains as explains,
+        t.name as type_name
+        from bill as b
+        left join bill_type as t
+        on b.type_id = t.id
+    </sql>
+
+    <select id="selectByTypeAndDate" resultType="com.wmz.server_service.bean.Bill">
+        <include refid="sqlSession"></include>
+        <where> 1 = 1
+        <if test="type_id != null">
+            and type_id = #{type_id}
+        </if>
+        <if test="start != null">
+            and bill_time &gt;= #{start}
+        </if>
+        <if test="end != null">
+            and bill_time &lt;= #{end}
+        </if>
+        </where>
+    </select>
+</mapper>
