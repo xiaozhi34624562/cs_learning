@@ -140,3 +140,7 @@
 - `docker commit imageId imageName:version` 制作镜像
 - `docker save -o compressedFileName imageName:version` 压缩镜像
 - `docker load -i compressedFileName` 加载镜像
+### dockerfile
+- 概念
+  - dockerfile是一个文本文件，包含了一条条的指令，每一条指令构建一层，基于基础镜像，最终构成一个新的镜像
+  - 
