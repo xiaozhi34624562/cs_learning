@@ -1,0 +1,26 @@
+server:
+  port: 9090
+spring:
+  application:
+    name: upload-service
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 20MB
+fdfs:
+  connect-timeout: 8000
+  so-timeout: 8000
+  thumb-image:
+    width: 150
+    height: 150
+  tracker-list: 192.168.1.23:22122
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8081/eureka
+  instance:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 5

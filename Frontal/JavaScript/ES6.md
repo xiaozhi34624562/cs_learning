@@ -58,6 +58,15 @@
     let stu = {name:"张三", age:18};
     console.log(`my name is ${stu.name}. I am ${stu.age}`);
     ```
-  - 标签模版
+  - 标签模版(函数调用的一种特殊)
     ```
-    alert("hello"); 等同于 alert`hello`;
+    alert("hello"); 
+    // 等同于 
+    alert`hello`;
+    
+    tag(['Hello ', ' world ', ''], 15, 50);
+    // 等同于
+    tag`Hello ${ a + b } world ${ a * b }`;
+    ```
+- 字符串的新增方法
+  - 
