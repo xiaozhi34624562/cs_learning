@@ -75,7 +75,7 @@ console.log(ob1 instanceof Stu);
   - toString() 数组转换成字符串
   - join() 将数组所有元素放入一个字符串，元素通过指定的分隔符进行分隔
   - pop() 删除并返回最后一个元素
-  - push() 想数组增加一个或多个元素，返回新数组的长度
+  - push() 向数组增加一个或多个元素，返回新数组的长度
   - shift() 取出数组的第一个元素，修改length的属性
   - unshift() 在数组最前面插入项，返回数组的长度
   - reverse() 翻转数组
@@ -84,9 +84,9 @@ console.log(ob1 instanceof Stu);
   - arr = []
   - arr.length = 0
   - arr.splice(0, arr.length)
-### 基本包装类型（Number String Boolean）
+### 基本包装类型（Number, String, Boolean）
   - String
-    - indexof("Li", index)搜索的词语和启示的位置，index可以省略； search() 只能是第一次的位置 and lastIndexof()
+    - indexof("Li", index)搜索的词语和起始的位置，index可以省略； search() 只能是第一次的位置 and lastIndexof()
     - slice(start, end) 两个参数可正可负; substring(start, end) 只能是正数； substr(start, length) 
     - concate()
     - replace()
