@@ -1,0 +1,21 @@
+# application.yml https://github.com/xiaozhi34624562/my-config/blob/main/account-dev.yml
+spring:
+  cloud:
+    config:
+      name: account
+      profile: dev
+      label: master
+      discovery:
+        enabled: true
+        service-id: config-server
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  thymeleaf:
+    cache: false
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10088/eureka

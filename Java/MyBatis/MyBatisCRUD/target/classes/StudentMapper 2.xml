@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kaikeba.dao.StudentDao">
+    <select id="findAll" resultType="com.kaikeba.bean.Student">
+        select * from student;
+    </select>
+    <insert id="insertStu1" parameterType="com.kaikeba.bean.Student">
+        insert into student value(#{id}, #{name}, #{stuAge}, #{stuNumber})
+    </insert>
+    <insert id="insertStu2" parameterType="com.kaikeba.bean.Student" useGeneratedKeys="true" keyProperty="id">
+        insert into student(name, stuAge, stuNumber) value(#{name}, #{stuAge}, #{stuNumber})
+    </insert>
+    <insert id="insertStu3" parameterType="map">
+        insert into student(name, stuAge, stuNumber) value(#{name}, #{age}, #{number})
+    </insert>
+    <delete id="deleteStu" parameterType="int">
+        delete from student where id = #{id}
+    </delete>
+    <update id="updateStu1" parameterType="com.kaikeba.bean.Student">
+        update student set name = #{name}, stuAge = #{stuAge}, stuNumber = #{stuNumber} where id = #{id}
+    </update>
+    <update id="updateStu2" parameterType="map">
+        update student set name = #{name} where id = #{id}
+    </update>
+
+</mapper>

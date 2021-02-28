@@ -82,31 +82,16 @@
 </div>
 </body>
 <script th:inline="javascript">
-    // $(function(){
-    //     $.getJSON("/bill/list1.do", null, function(data) {
-    //         var billTypes = data.billTypes;
-    //         for (var i = 0; i < billTypes.length ; i++) {
-    //             var item = "<option th:value=" + " th:text=" +billTypes[i].name+"></option>"
-    //             $("#selectBill").append(item);
-    //         }
-    //     });
-    // })
     $(function(){
-        $.ajax({
-            type:"post",
-            url:"/bill/list",
-            data:{},
-            async:false,
-            success:function (data) {
-                var billTypes = data.billTypes;
-                for (var i = 0; i < billTypes.length ; i++) {
-                    var item = "<option th:value=" + " th:text=" +billTypes[i].name+"></option>"
-                    $("#selectBill").append(item);
-                }
-
+        $.post("/bill/list1.do", null, function(data) {
+            var billTypes = data.billTypes;
+            for (var i = 0; i < billTypes.length ; i++) {
+                var item = "<option th:value=" + " th:text=" +billTypes[i].name+"></option>"
+                $("#selectBill").append(item);
             }
-        })
+        });
     })
+
 
 </script>
 </html>

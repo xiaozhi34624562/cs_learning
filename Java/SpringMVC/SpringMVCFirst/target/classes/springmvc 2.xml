@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd
+http://www.springframework.org/schema/aop
+                           http://www.springframework.org/schema/aop/spring-aop.xsd
+
+http://www.springframework.org/schema/mvc
+                           http://www.springframework.org/schema/mvc/spring-mvc.xsd"
+>
+
+    <!-- 1.扫描注解包-->
+    <context:component-scan base-package="com.kaikeba"></context:component-scan>
+    <!--2.创建视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/"></property>   <!--用来指定结果页面的前缀和后缀-->
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+
+    <mvc:annotation-driven></mvc:annotation-driven>
+    <!-- <mvc:resources mapping="/img/**" location="/img/" ></mvc:resources>
+     <mvc:resources mapping="/css/**" location="/css/" ></mvc:resources>-->
+    <mvc:default-servlet-handler></mvc:default-servlet-handler>
+
+<!--    &lt;!&ndash;添加拦截器&ndash;&gt;-->
+<!--    <mvc:interceptors>-->
+<!--        <bean class="com.kaikeba.util.MyInterceptor1"></bean>-->
+<!--        <bean class="com.kaikeba.util.MyInterceptor2"></bean>-->
+<!--    </mvc:interceptors>-->
+<!--    &lt;!&ndash;文件上传对象&ndash;&gt;-->
+<!--    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">-->
+<!--        <property name="maxUploadSize" value="9999999999"></property>-->
+<!--        <property name="defaultEncoding" value="UTF-8"></property>-->
+<!--    </bean>-->
+</beans>
