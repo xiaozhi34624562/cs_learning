@@ -1,0 +1,5 @@
+../../contact_data/rating_11491.csv       0.94838         0.95216
+../../contact_data/rating_12204.csv       0.94162         0.94183
+../../contact_data/rating_12158.csv       0.93906         0.93939
+../../contact_data/rating_12170.csv       0.94661         0.95003
+../../contact_data/rating_10000.csv       0.95388         0.95436
