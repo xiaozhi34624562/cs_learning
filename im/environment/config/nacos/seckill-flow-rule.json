@@ -1,0 +1,20 @@
+[
+  {
+    "resource": "QUEUE-DATA-FLOW",
+    "limitApp": "default",
+    "grade": 1,
+    "count": 1,
+    "clusterMode": false,
+    "controlBehavior": 0,
+    "strategy": 0
+  },
+  {
+    "resource": "SAVE-DATA-FLOW",
+    "limitApp": "default",
+    "grade": 1,
+    "count": 1,
+    "clusterMode": false,
+    "controlBehavior": 0,
+    "strategy": 0
+  }
+]

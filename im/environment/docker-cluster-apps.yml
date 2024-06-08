@@ -1,0 +1,34 @@
+version: '3.2'
+
+networks:
+  binghe-cluster-apps:
+    driver: overlay
+
+volumes:
+  prometheus_data: {}
+services:
+  bh-im-server:
+    image: bh-im-server
+    container_name: bh-im-server
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - 8081:8081
+      - 20880:20880
+    networks:
+      - binghe-cluster-apps
+    restart: on-failure
+  bh-im-platform:
+    image: bh-im-platform
+    container_name: bh-im-platform
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - 8082:8082
+      - 20881:20881
+    networks:
+      - binghe-cluster-apps
+    restart: on-failure
+
+
+

@@ -1,0 +1,52 @@
+version: '3.2'
+
+networks:
+  binghe-network:
+    driver: bridge
+
+volumes:
+  prometheus_data: {}
+services:
+  elasticsearch:
+    image: elasticsearch:7.14.2
+    container_name: elasticsearch
+    volumes:
+    - ./config/elk/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    ports:
+    - "9200:9200"
+    - "9300:9300"
+    environment:
+      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+      discovery.type: single-node
+    networks:
+    - binghe-network
+
+  logstash:
+    image: logstash:7.14.2
+    container_name: logstash
+    volumes:
+    - ./config/elk/logstash.yml:/usr/share/logstash/config/logstash.yml
+    - ./config/elk/pipeline:/usr/share/logstash/pipeline
+    ports:
+    - "5044:5044"
+    - "5000:5000/tcp"
+    - "5000:5000/udp"
+    - "9600:9600"
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+    networks:
+    - binghe-network
+    depends_on:
+    - elasticsearch
+
+  kibana:
+    image: kibana:7.14.2
+    container_name: kibana
+    volumes:
+    - ./config/elk/kibana.yml:/usr/share/kibana/config/kibana.yml
+    ports:
+    - "5601:5601"
+    networks:
+    - binghe-network
+    depends_on:
+    - elasticsearch

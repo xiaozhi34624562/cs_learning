@@ -1,0 +1,27 @@
+{
+  "enabled": true,
+  "ipRule": {
+    "enabled": true,
+    "windowPeriod": 1000,
+    "windowSize": 5
+  },
+  "accountRule": {
+    "enabled": true
+  },
+  "pathRule": {
+    "enabled": true,
+    "windowPeriod": 1000,
+    "windowSize": 5,
+    "urlPaths": [
+      {
+        "path": "/**"
+      },
+      {
+        "enabled": true,
+        "path": "/seckill-order/order/saveSeckillOrder",
+        "windowPeriod": 1000,
+        "windowSize": 3
+      }
+    ]
+  }
+}

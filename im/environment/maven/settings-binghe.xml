@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+  <localRepository>D:/Maven_Repository/.m2/repository</localRepository>
+  <pluginGroups>
+  </pluginGroups>
+
+  <proxies>
+  </proxies>
+  
+  <servers>
+    <server>
+	   <id>binghe</id>
+	   <username>binghe</username>
+	   <password>binghe123</password>
+	</server>
+  </servers>
+
+  <mirrors>
+	<mirror>
+		<id>central</id>
+		<name>Local Repository</name>
+		<url>http://192.168.106.102:8081/repository/maven-public</url>
+		<mirrorOf>*</mirrorOf>
+	</mirror>
+	<mirror>
+		<id>nexus-aliyun</id>
+		<mirrorOf>*</mirrorOf>
+		<name>Nexus aliyun</name>
+		<url>http://maven.aliyun.com/nexus/content/groups/public</url>
+    </mirror>
+  </mirrors>
+  
+  <profiles>
+     <profile>
+		<id>maven-public</id>
+		<activation>
+			<activeByDefault>true</activeByDefault>
+			<jdk>1.8</jdk>
+		</activation>
+		<properties>
+			<maven.compiler.source>1.8</maven.compiler.source>
+			<maven.compiler.target>1.8</maven.compiler.target>
+			<maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
+		</properties>
+		<repositories>
+			<repository>
+				<id>nexus-public</id>
+				<url>http://192.168.106.102:8081/repository/maven-public/</url>
+				<releases>
+					<enabled>true</enabled>
+					<updatePolicy>always</updatePolicy>
+				</releases>
+				<snapshots>
+					<enabled>true</enabled>
+					<updatePolicy>always</updatePolicy>
+				</snapshots>
+			</repository>
+		</repositories>
+	</profile>
+  </profiles>
+
+</settings>
